@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.ArrayList;
+
 
 abstract class Car implements Movable {
     protected int nrDoors;
@@ -59,6 +61,21 @@ abstract class Car implements Movable {
 
     public Color getColor() {
         return color;
+    }
+
+    public double[] getPosition(){
+        double[] tuple = new double[2];
+        tuple[0]=x;
+        tuple[1]=y;
+        return tuple;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     public void setColor(Color clr){
