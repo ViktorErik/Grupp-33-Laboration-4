@@ -36,6 +36,7 @@ abstract class Car implements Movable {
         }
     }
 
+
     public void turnLeft() {
         direction = (direction + 3) % 4;
     }
