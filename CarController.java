@@ -9,7 +9,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class CarController{
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -32,7 +32,7 @@ public class CarController {
         // cc.cars.add(new Volvo240());
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame = new CarView("CarSim 2.0", cc);
 
         // Start the timer
         cc.timer.start();
