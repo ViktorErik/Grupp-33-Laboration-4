@@ -27,9 +27,9 @@ public class CarController <ACar extends Car> {
 
     public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
+        CarController<Car> cc = new CarController<Car>();
 
-        // cc.cars.add(new Volvo240());
+        cc.cars.add(new Saab95());
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -45,8 +45,9 @@ public class CarController <ACar extends Car> {
         public void actionPerformed(ActionEvent e) {
             for (ACar car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getPosition().getX());
-                int y = (int) Math.round(car.getPosition().getY());
+                // stod innan car.getPosition().getX() men aja
+                int x = (int) Math.round(car.getX());
+                int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
@@ -55,11 +56,36 @@ public class CarController <ACar extends Car> {
     }
 
     // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (ACar car : cars
-                ) {
-            car.gas(gas);
+    protected void gas(int amount) {
+        double gasAmount = ((double) amount) / 100;
+        for (ACar car : cars) {
+            car.gas(gasAmount);
+        }
+    }
+    protected void brake(int amount) {
+        double brakeAmount = ((double) amount) / 100;
+        for (ACar car : cars) {
+            car.brake(brakeAmount);
+        }
+    }
+    protected void startEngine() {
+        for (ACar car : cars) {
+            car.startEngine();
+        }
+    }
+    protected void stopEngine() {
+        for (ACar car : cars) {
+            car.stopEngine();
+        }
+    }
+    protected void turnRight() {
+        for (ACar car : cars) {
+            car.turnRight();
+        }
+    }
+    protected void turnLeft() {
+        for (ACar car : cars) {
+            car.turnLeft();
         }
     }
 }
