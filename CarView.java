@@ -4,6 +4,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -18,7 +20,7 @@ public class CarView extends JFrame{
     private static final int Y = 600;
 
     // The controller member
-    CarController carC;
+    CarController<Car> carC;
 
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
@@ -135,7 +137,25 @@ public class CarView extends JFrame{
                 carC.gas(gasAmount);
             }
         });
+        KeyListener turn = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                int key = e.getKeyCode();
 
+                if (key == KeyEvent.VK_LEFT) {
+                    carC.turnLeft();
+                }
+
+                if (key == KeyEvent.VK_RIGHT) {
+                    carC.turnRight();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        };
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
