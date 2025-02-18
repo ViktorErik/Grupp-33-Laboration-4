@@ -16,8 +16,8 @@ import java.awt.event.KeyListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 600;
+    private static final int X = 900;
+    private static final int Y = 800;
 
     // The controller member
     CarController carC;
@@ -27,6 +27,9 @@ public class CarView extends JFrame{
     JPanel controlPanel = new JPanel();
 
     JPanel gasPanel = new JPanel();
+
+    JPanel turnPanel = new JPanel();
+
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount");
@@ -41,6 +44,9 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
+    JButton rightButton = new JButton("Turn right");
+    JButton leftButton = new JButton("Turn left");
+
     // Constructor
     public CarView(String framename, CarController cc){
         this.carC = cc;
@@ -54,7 +60,6 @@ public class CarView extends JFrame{
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
         this.add(drawPanel);
 
 
@@ -85,7 +90,7 @@ public class CarView extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+        controlPanel.setPreferredSize(new Dimension((X/2)-50, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
@@ -101,8 +106,16 @@ public class CarView extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
+        turnPanel.setLayout(new GridLayout(2,1));
+        turnPanel.add(rightButton);
+        turnPanel.add(leftButton);
+
+        turnPanel.setPreferredSize(new Dimension(100, 200));
+        this.add(turnPanel);
+        turnPanel.setBackground(Color.CYAN);
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
+
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,25 +165,20 @@ public class CarView extends JFrame{
                 carC.stopEngine();
             }
         });
-        KeyListener turn = new KeyListener() {
+
+        rightButton.addActionListener(new ActionListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                int key = e.getKeyCode();
-
-                if (key == KeyEvent.VK_LEFT) {
-                    carC.turnLeft();
-                }
-
-                if (key == KeyEvent.VK_RIGHT) {
-                    carC.turnRight();
-                }
+            public void actionPerformed(ActionEvent e) {
+                carC.turnRight();
             }
+        });
+        leftButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.turnLeft();
+            }
+        });
 
-            @Override
-            public void keyPressed(KeyEvent e) {}
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        };
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 

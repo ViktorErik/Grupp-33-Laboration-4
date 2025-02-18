@@ -38,13 +38,13 @@ abstract class Car implements Movable {
         }
     }
 
-
+//ändrade på turn grejerna för de åkte åt fel håll annars
     public void turnLeft() {
-        direction = (direction + 3) % 4;
+        direction = (direction + 1) % 4;
     }
 
     public void turnRight() {
-        direction = (direction + 1) % 4;
+        direction = (direction + 3) % 4;
     }
 
     public int getNrDoors(){
