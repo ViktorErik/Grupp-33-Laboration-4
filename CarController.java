@@ -9,7 +9,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class CarController <ACar extends Car> {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -21,7 +21,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    // ArrayList<ACar> cars = new ArrayList<>();
+    ArrayList<ACar> cars = new ArrayList<>();
 
     //methods:
 
@@ -57,9 +57,9 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-       /* for (ACar car : cars
+        for (ACar car : cars
                 ) {
             car.gas(gas);
-        }*/
+        }
     }
 }
