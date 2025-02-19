@@ -17,7 +17,7 @@ import java.awt.event.KeyListener;
 
 public class CarView extends JFrame{
     protected static final int X = 900;
-    private static final int Y = 600;
+    private static final int Y = 800;
     protected static final int paneY = Y - 240;
 
     // The controller member
@@ -32,7 +32,7 @@ public class CarView extends JFrame{
     JPanel turnPanel = new JPanel();
 
     JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
+    int gasAmount = 10;
     JLabel gasLabel = new JLabel("Amount");
 
     JButton gasButton = new JButton("Gas");
@@ -66,7 +66,7 @@ public class CarView extends JFrame{
 
 
         SpinnerModel spinnerModel =
-                new SpinnerNumberModel(0, //initial value
+                new SpinnerNumberModel(10, //initial value
                         0, //min
                         100, //max
                         1);//step

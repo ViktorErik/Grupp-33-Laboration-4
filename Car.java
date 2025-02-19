@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
@@ -11,13 +12,17 @@ abstract class Car implements Movable {
     private int direction = 0;
     protected double x, y = 0;
     protected boolean isLoaded;
+    protected String pic;
 
-    protected Car(int nrDoors, Color color, int enginePower, String modelName) {
+    protected Car(int nrDoors, Color color, int enginePower, String modelName, int x, int y, String pic) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
         this.isLoaded = false;
+        this.x = x;
+        this.y = y;
+        this.pic=pic;
         stopEngine();
     }
 
@@ -87,6 +92,10 @@ abstract class Car implements Movable {
 
     public double getY() {
         return y;
+    }
+    
+    public String getPic() {
+        return this.pic;
     }
 
     public void setColor(Color clr){

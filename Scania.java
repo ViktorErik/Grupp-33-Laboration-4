@@ -4,10 +4,13 @@ import java.awt.*;
 
 public class Scania extends Car implements NonLoadable{
     private double flatbedAngle = 0;
-    private final double trimfactor = 1.07;
+    private final double trimfactor = 1.01;
 
     protected Scania() {
-        super(2, Color.black, 1235, "Scania");
+        super(2, Color.black, 94, "Scania", 0, 0, "pics/Scania.jpg");
+    }
+    protected Scania(int x, int y) {
+        super(2, Color.black, 94, "Scania", x, y, "pics/Scania.jpg");
     }
 
     public void tiltFlatbed(double angle) {
@@ -47,6 +50,6 @@ public class Scania extends Car implements NonLoadable{
 
     @Override
     protected double speedFactor() {
-        return enginePower * trimfactor;
+        return enginePower * trimfactor * 0.05;
     }
 }

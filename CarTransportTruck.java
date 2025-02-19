@@ -14,7 +14,11 @@ public class CarTransportTruck extends Car implements NonLoadable {
     Stack<Car> loadedCars = new Stack<>();
 
     protected CarTransportTruck() {
-        super(2, Color.blue, 999, "Lorry");
+        super(2, Color.blue, 999, "Lorry", 0, 0, "pics/Scania.jpg");
+    }
+
+    protected CarTransportTruck(int x, int y) {
+        super(2, Color.blue, 999, "Lorry", x, y, "pics/Scania.jpg");
     }
 
     public void tiltFlatbed (boolean tilt) {
