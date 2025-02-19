@@ -26,15 +26,17 @@ abstract class Car implements Movable {
         stopEngine();
     }
 
-    private void collide() {
-        try { Thread.sleep(500);} // Stop the car
-        catch (InterruptedException e) { }
+    private void collide(double x, double y) {
         direction = (direction + 2) % 4; // Change direction
+        stopEngine();
+        if (x < 0) this.x = 1;
+        if (x + 100 > CarView.X) this.x = CarView.X - 101;
+        if (y < 0) this.y = 1;
+        if (y + 60 > CarView.paneY) this.y = CarView.paneY - 61;
+        startEngine();
     }
 
     public void move() {
-        double tempX = x;
-        double tempY = y;
         switch (direction) {
             case 0:
                 y += getCurrentSpeed();
@@ -50,7 +52,7 @@ abstract class Car implements Movable {
                 break;
         }
         if (x<0 || y<0 || x+100 > CarView.X || y+60>CarView.paneY) {
-            collide();
+            collide(x, y);
         }
     }
 

@@ -16,7 +16,7 @@ import java.awt.event.KeyListener;
  **/
 
 public class CarView extends JFrame{
-    protected static final int X = 900;
+    protected static final int X = 1000;
     private static final int Y = 800;
     protected static final int paneY = Y - 240;
 
@@ -125,7 +125,7 @@ public class CarView extends JFrame{
         });
         turboOnButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { carC.gas(gasAmount);}
+            public void actionPerformed(ActionEvent e) { carC.turboOn();}
         });
         liftBedButton.addActionListener(new ActionListener() {
             @Override
@@ -145,7 +145,7 @@ public class CarView extends JFrame{
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                carC.turboOff();
             }
         });
         lowerBedButton.addActionListener(new ActionListener() {

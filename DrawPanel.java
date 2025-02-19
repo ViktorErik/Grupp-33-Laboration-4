@@ -7,21 +7,28 @@ import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel <ACar extends Car> extends JPanel{
 
+    private ArrayList<ACar> cars;
     // Just a single image, TODO: Generalize
-    BufferedImage carImage;
+    // BufferedImage carImage;
     // To keep track of a single car's position
+    BufferedImage volvoImage;
+    BufferedImage saabImage;
+    BufferedImage scaniaImage;
+    BufferedImage carImage;
+    String carPic = "";
     Point carPoint = new Point();
 
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
     // TODO: Make this general for all cars
-    void moveit(int x, int y, ArrayList<Car> cars) throws IOException {
+    void moveit(int x, int y, ArrayList<ACar> cars) {
         carPoint.x = x;
         carPoint.y = y;
-
+        this.cars = cars;
+        // carPic = car.getPic();
 
     }
 
@@ -38,7 +45,11 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-
+            /*
+            volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+             */
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
         {
@@ -53,12 +64,34 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // lägg till filnamn fält i varje Carobjekt
-        for (Car car : cars){
-            carImage=ImageIO.read(DrawPanel.class.getResourceAsStream(car.getPic()));
-            System.out.println(car.modelName + " " + car.x + " " + car.y + " " + car.getPic());
-            g.drawImage(carImage, carPoint.x, carPoint.y, null);
-        }
+
+
+
+        // System.out.println(car.modelName + " " + car.x + " " + car.y + " " + car.getPic());
+        // g.drawImage(carImage, carPoint.x, carPoint.y, null);
+
          // see javadoc for more info on the parameters
+        if (!(cars == null)) {
+            for (Car car : cars) {
+                // System.out.println(car.modelName);
+                try {
+                    carImage = ImageIO.read(DrawPanel.class.getResourceAsStream(car.getPic()));
+                    // System.out.println(carPic + " " + car.getX() + " " + car.getY());
+                    g.drawImage(carImage, (int) car.getX(), (int) car.getY(), null);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
-    }
+            /*
+            if (i == 1) {
+                g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+            }
+             */
+        }
+
+        // g.drawImage(volvoImage, carPoint.x, carPoint.y, null);
+
 }
