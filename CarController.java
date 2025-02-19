@@ -13,7 +13,7 @@ public class CarController <ACar extends Car> {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
+    private final int delay = 20;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
@@ -30,6 +30,8 @@ public class CarController <ACar extends Car> {
         CarController<Car> cc = new CarController<Car>();
 
         cc.cars.add(new Saab95());
+        cc.cars.add(new Volvo240());
+        // cc.cars.add(new Scania());
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);

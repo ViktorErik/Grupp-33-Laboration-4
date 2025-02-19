@@ -21,7 +21,15 @@ abstract class Car implements Movable {
         stopEngine();
     }
 
+    private void collide() {
+        try { Thread.sleep(500);} // Stop the car
+        catch (InterruptedException e) { }
+        direction = (direction + 2) % 4; // Change direction
+    }
+
     public void move() {
+        double tempX = x;
+        double tempY = y;
         switch (direction) {
             case 0:
                 y += getCurrentSpeed();
@@ -35,6 +43,9 @@ abstract class Car implements Movable {
             case 3:
                 x -= getCurrentSpeed();
                 break;
+        }
+        if (x<0 || y<0 || x+100 > CarView.X || y+60>CarView.paneY) {
+            collide();
         }
     }
 
@@ -121,7 +132,7 @@ abstract class Car implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
-    public static void main(String[] args) {
+    // public static void main(String[] args) {
         /*
         Volvo240 v = new Volvo240();
         v.move();
@@ -136,5 +147,5 @@ abstract class Car implements Movable {
         v.move();
         System.out.println(v.x + " " + v.y);
         */
-    }
+    // }
 }

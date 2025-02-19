@@ -53,6 +53,7 @@ public class DrawPanel extends JPanel{
         super.paintComponent(g);
         // lägg till filnamn fält i varje Carobjekt
         g.drawImage(saabImage, carPoint.x, carPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(volvoImage, carPoint.x, carPoint.y, null);
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
     }
 }

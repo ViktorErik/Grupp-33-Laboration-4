@@ -16,13 +16,14 @@ import java.awt.event.KeyListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 900;
-    private static final int Y = 800;
+    protected static final int X = 900;
+    private static final int Y = 600;
+    protected static final int paneY = Y - 240;
 
     // The controller member
     CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel = new DrawPanel(X, paneY);
 
     JPanel controlPanel = new JPanel();
 
