@@ -15,10 +15,10 @@ public class Scania extends Car implements NonLoadable{
 
     public void tiltFlatbed(double angle) {
         if (getCurrentSpeed() > 0) {
-            throw new InternalError("Cannot tilt flatbed while driving.");
+            throw new IllegalArgumentException("Cannot tilt flatbed while driving.");
         }
         else if (angle > 70 || angle < 0) {
-            throw new InternalError("Angle out of range (0-70)");
+            throw new IllegalArgumentException("Angle out of range (0-70)");
         }
         flatbedAngle = angle;
     }
@@ -33,7 +33,7 @@ public class Scania extends Car implements NonLoadable{
             super.startEngine();
             return;
         }
-        throw new InternalError("Can't start engine with flatbed tilted");
+        throw new IllegalArgumentException("Can't start engine with flatbed tilted");
     }
 
     // You can increase speed by just calling gas
@@ -45,7 +45,7 @@ public class Scania extends Car implements NonLoadable{
             super.gas(amount);
             return;
         }
-        throw new InternalError("Can't gas with flatbed tilted");
+        throw new IllegalArgumentException("Can't gas with flatbed tilted");
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CarTransportTruck extends Car implements NonLoadable {
             flatbedDown = tilt;
             return;
         }
-        throw new InternalError("Your speed has to be zero to tilt the flatbed");
+        throw new IllegalArgumentException("Your speed has to be zero to tilt the flatbed");
     }
 
     public boolean getFlatbedDown() {
@@ -43,19 +43,19 @@ public class CarTransportTruck extends Car implements NonLoadable {
 
     public void loadCar(Car car) {
         if (!flatbedDown){
-            throw new InternalError("Flatbed has to be tilted down to load cars!");
+            throw new IllegalArgumentException("Flatbed has to be tilted down to load cars!");
         }
         else if (!(Math.abs(car.x - x) <= xRange && Math.abs(car.y - y) <= yRange)) {
-            throw new InternalError("Car location is out of range");
+            throw new IllegalArgumentException("Car location is out of range");
         }
         else if (car instanceof NonLoadable) {
-            throw new InternalError("Can't load CarTransportTruck on CarTransportTruck");
+            throw new IllegalArgumentException("Can't load CarTransportTruck on CarTransportTruck");
         }
         else if (loadedCars.size() >= maxCars) {
-            throw new InternalError("Truck is full of cars");
+            throw new IllegalArgumentException("Truck is full of cars");
         }
         else if (car.isLoaded){
-            throw new InternalError("Car is already loaded on a transport truck");
+            throw new IllegalArgumentException("Car is already loaded on a transport truck");
         }
         else {
             car.stopEngine();
@@ -72,7 +72,7 @@ public class CarTransportTruck extends Car implements NonLoadable {
             car.y -= yRange;
             return;
         }
-        throw new InternalError("Can't disengage car while flatbed is up!");
+        throw new IllegalArgumentException("Can't disengage car while flatbed is up!");
     }
 
     @Override
@@ -95,7 +95,7 @@ public class CarTransportTruck extends Car implements NonLoadable {
             super.startEngine();
             return;
         }
-        throw new InternalError("Can't start engine with flatbed tilted");
+        throw new IllegalArgumentException("Can't start engine with flatbed tilted");
     }
 
     // You can increase speed by just calling gas
@@ -107,6 +107,6 @@ public class CarTransportTruck extends Car implements NonLoadable {
             super.gas(amount);
             return;
         }
-        throw new InternalError("Can't gas with flatbed tilted");
+        throw new IllegalArgumentException("Can't gas with flatbed tilted");
     }
 }
