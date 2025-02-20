@@ -102,4 +102,14 @@ public class CarController <ACar extends Car> {
             if (car instanceof Saab95) ((Saab95) car).setTurboOn();
         }
     }
+    protected void liftBed() {
+        for (ACar car : cars) {
+            if (car instanceof Scania) ((Scania) car).tiltFlatbed(0);
+        }
+    }
+    protected void lowerBed() {
+        for (ACar car : cars) {
+            if (car instanceof Scania) ((Scania) car).tiltFlatbed(70);
+        }
+    }
 }

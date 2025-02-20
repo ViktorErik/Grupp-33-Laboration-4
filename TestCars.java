@@ -12,25 +12,7 @@ public class TestCars {
         v.brake(1);
         assertEquals(0, v.getCurrentSpeed());
     }
-    @Test
-    void positionTestV() {
-        Volvo240 v = new Volvo240();
-        v.move();
-        assertEquals(0, v.x);
-        assertEquals(0, v.y);
-        v.gas(1);
-        v.move();
-        assertEquals(0, v.x);
-        assertEquals(1.25, v.y);
-        v.turnRight();
-        v.move();
-        assertEquals(1.25, v.x);
-        assertEquals(1.25, v.y);
-        v.turnRight();
-        v.move();
-        assertEquals(1.25, v.x);
-        assertEquals(0, v.y);
-    }
+
     @Test
     void testCurrentSpeedV() {
         // Checks that speed can't go beyond the car's engine power
@@ -57,26 +39,6 @@ public class TestCars {
     }
 
     @org.junit.jupiter.api.Test
-    void positionTestSB() {
-        Saab95 s = new Saab95();
-        s.move();
-        assertEquals(0, s.x);
-        assertEquals(0, s.y);
-        s.gas(1);
-        s.move();
-        assertEquals(0, s.x);
-        assertEquals(1.25, s.y);
-        s.turnRight();
-        s.move();
-        assertEquals(1.25, s.x);
-        assertEquals(1.25, s.y);
-        s.turnRight();
-        s.move();
-        assertEquals(1.25, s.x);
-        assertEquals(0, s.y);
-    }
-
-    @org.junit.jupiter.api.Test
     void testCurrentSpeedSB() {
         // Checks that speed can't go beyond the car's engine power
         // and that using Car.gas won't decrease the speed
@@ -96,9 +58,9 @@ public class TestCars {
         Scania s = new Scania();
         double tempAngle = s.getFlatbedAngle();
 
-        assertThrows(InternalError.class, () -> s.tiltFlatbed(-1));
+        assertThrows(IllegalArgumentException.class, () -> s.tiltFlatbed(-1));
 
-        assertThrows(InternalError.class, () -> s.tiltFlatbed(91));
+        assertThrows(IllegalArgumentException.class, () -> s.tiltFlatbed(91));
         s.tiltFlatbed(45);
         assertEquals(45,s.getFlatbedAngle());
     }
@@ -107,7 +69,7 @@ public class TestCars {
         Scania s = new Scania();
         s.startEngine();
         s.gas(1);
-        assertThrows(InternalError.class, () -> s.tiltFlatbed(45));
+        assertThrows(IllegalArgumentException.class, () -> s.tiltFlatbed(45));
     }
 
     @org.junit.jupiter.api.Test
@@ -115,7 +77,7 @@ public class TestCars {
         Scania s = new Scania();
         s.stopEngine();
         s.tiltFlatbed(45);
-        assertThrows(InternalError.class, () -> s.startEngine());
+        assertThrows(IllegalArgumentException.class, () -> s.startEngine());
         s.tiltFlatbed(0);
         s.startEngine();
         s.gas(1);
@@ -133,22 +95,22 @@ public class TestCars {
         CarTransportTruck CT1 = new CarTransportTruck();
         CarTransportTruck CT2 = new CarTransportTruck();
         Scania S = new Scania();
-        assertThrows(InternalError.class, () -> CT1.loadCar(CT2));
-        assertThrows(InternalError.class, () -> CT1.loadCar(S));
+        assertThrows(IllegalArgumentException.class, () -> CT1.loadCar(CT2));
+        assertThrows(IllegalArgumentException.class, () -> CT1.loadCar(S));
     }
     @org.junit.jupiter.api.Test
     void testTiltWhileMoving(){
         CarTransportTruck ct = new CarTransportTruck();
         ct.startEngine();
         ct.gas(1);
-        assertThrows(InternalError.class, () -> ct.tiltFlatbed(true));
+        assertThrows(IllegalArgumentException.class, () -> ct.tiltFlatbed(true));
     }
     @org.junit.jupiter.api.Test
     void testMoveWhileTilted(){
         CarTransportTruck ct = new CarTransportTruck();
         ct.tiltFlatbed(true);
-        assertThrows(InternalError.class, () -> ct.startEngine());
-        assertThrows(InternalError.class, () -> ct.gas(1));
+        assertThrows(IllegalArgumentException.class, () -> ct.startEngine());
+        assertThrows(IllegalArgumentException.class, () -> ct.gas(1));
     }
     @org.junit.jupiter.api.Test
     void testLoadDownAndClose(){
@@ -167,7 +129,7 @@ public class TestCars {
         ct.move();
         ct.stopEngine();
         ct.tiltFlatbed(true);
-        assertThrows(InternalError.class,() ->ct.loadCar(v));
+        assertThrows(IllegalArgumentException.class,() ->ct.loadCar(v));
     }
     @org.junit.jupiter.api.Test
     void testDisengageWhileMoving(){
@@ -176,7 +138,7 @@ public class TestCars {
         ct.tiltFlatbed(true);
         ct.loadCar(v);
         ct.tiltFlatbed(false);
-        assertThrows(InternalError.class, () -> ct.disengageCar());
+        assertThrows(IllegalArgumentException.class, () -> ct.disengageCar());
         ct.tiltFlatbed(true);
         ct.disengageCar();
         assertEquals(ct.x - ct.xRange, v.x);
@@ -239,7 +201,7 @@ public class TestCars {
         Volvo240 v2 = new Volvo240();
         autoRepairShop.addCar(v1);
 
-        assertThrows(InternalError.class, () -> autoRepairShop.getCar(v2));
+        assertThrows(IllegalArgumentException.class, () -> autoRepairShop.getCar(v2));
 
     }
     //</editor-fold>

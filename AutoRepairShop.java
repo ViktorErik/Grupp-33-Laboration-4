@@ -16,7 +16,7 @@ public class AutoRepairShop<T extends Car> {
             cars.add(car);
             return;
         }
-        throw new InternalError("AutoRepairShop is full! Chill out!");
+        throw new IllegalArgumentException("AutoRepairShop is full! Chill out!");
     }
 
     public T getCar(T car) {
@@ -24,7 +24,7 @@ public class AutoRepairShop<T extends Car> {
             cars.remove(car);
             return car;
         }
-        throw new InternalError("Car is not in the AutoRepairShop object");
+        throw new IllegalArgumentException("Car is not in the AutoRepairShop object");
     }
 
     public static void main(String[] args) {
