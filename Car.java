@@ -13,6 +13,7 @@ abstract class Car implements Movable {
     protected double x, y = 0;
     protected boolean isLoaded;
     protected String pic;
+    protected boolean isVisible = true;
 
     protected Car(int nrDoors, Color color, int enginePower, String modelName, int x, int y, String pic) {
         this.nrDoors = nrDoors;
@@ -26,13 +27,27 @@ abstract class Car implements Movable {
         stopEngine();
     }
 
-    private void collide(double x, double y) {
-        direction = (direction + 2) % 4; // Change direction
-        stopEngine();
+    private void borderCollide(double x, double y) {
+        collide(x, y);
         if (x < 0) this.x = 1;
         if (x + 100 > CarView.X) this.x = CarView.X - 101;
         if (y < 0) this.y = 1;
         if (y + 60 > CarView.paneY) this.y = CarView.paneY - 61;
+    }
+
+    private void workshopCollide(double x, double y) {
+        if (direction == 0) this.y = DrawPanel.volvoWorkshopPoint.getY() - 60;
+        if (direction == 1) this.x = DrawPanel.volvoWorkshopPoint.getX() - 100;
+        if (direction == 2) this.y = DrawPanel.volvoWorkshopPoint.getY() + 96;
+        if (direction == 3) this.x = DrawPanel.volvoWorkshopPoint.getX() + 101;
+        //this.x <= DrawPanel.volvoWorkshopPoint.getX() + 101 && DrawPanel.volvoWorkshopPoint.getX() <= this.x &&
+          //      this.y <= DrawPanel.volvoWorkshopPoint.getY() + 96 && DrawPanel.volvoWorkshopPoint.getY() < this.y)
+        collide(x, y);
+    }
+
+    private void collide(double x, double y) {
+        direction = (direction + 2) % 4; // Change direction
+        stopEngine();
         startEngine();
     }
 
@@ -52,7 +67,12 @@ abstract class Car implements Movable {
                 break;
         }
         if (x<0 || y<0 || x+100 > CarView.X || y+60>CarView.paneY) {
-            collide(x, y);
+            borderCollide(x, y);
+        }
+        if (!(this instanceof Volvo240) &&
+                this.x <= DrawPanel.volvoWorkshopPoint.getX() + 101 && DrawPanel.volvoWorkshopPoint.getX() <= this.x + 100 &&
+                this.y <= DrawPanel.volvoWorkshopPoint.getY() + 96 && DrawPanel.volvoWorkshopPoint.getY() <= this.y + 60) {
+            workshopCollide(x, y);
         }
     }
 

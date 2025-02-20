@@ -21,7 +21,7 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     Point carPoint = new Point();
 
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
+    static Point volvoWorkshopPoint = new Point(300,300);
 
     // TODO: Make this general for all cars
     void moveit(int x, int y, ArrayList<ACar> cars) {
