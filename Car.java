@@ -36,13 +36,16 @@ abstract class Car implements Movable {
     }
 
     private void workshopCollide(double x, double y) {
+        if (this.isVisible && this instanceof Volvo240) {
+            this.isVisible = false;
+        }
+
         if (direction == 0) this.y = DrawPanel.volvoWorkshopPoint.getY() - 60;
         if (direction == 1) this.x = DrawPanel.volvoWorkshopPoint.getX() - 100;
         if (direction == 2) this.y = DrawPanel.volvoWorkshopPoint.getY() + 96;
         if (direction == 3) this.x = DrawPanel.volvoWorkshopPoint.getX() + 101;
-        //this.x <= DrawPanel.volvoWorkshopPoint.getX() + 101 && DrawPanel.volvoWorkshopPoint.getX() <= this.x &&
-          //      this.y <= DrawPanel.volvoWorkshopPoint.getY() + 96 && DrawPanel.volvoWorkshopPoint.getY() < this.y)
         collide(x, y);
+
     }
 
     private void collide(double x, double y) {
@@ -69,7 +72,7 @@ abstract class Car implements Movable {
         if (x<0 || y<0 || x+100 > CarView.X || y+60>CarView.paneY) {
             borderCollide(x, y);
         }
-        if (!(this instanceof Volvo240) &&
+        if (
                 this.x <= DrawPanel.volvoWorkshopPoint.getX() + 101 && DrawPanel.volvoWorkshopPoint.getX() <= this.x + 100 &&
                 this.y <= DrawPanel.volvoWorkshopPoint.getY() + 96 && DrawPanel.volvoWorkshopPoint.getY() <= this.y + 60) {
             workshopCollide(x, y);
@@ -137,6 +140,10 @@ abstract class Car implements Movable {
     public void gas(double amount) {
         if (0 <= amount && amount <= 1 && !this.isLoaded) {
             incrementSpeed(amount);
+            if (!this.isVisible && this instanceof Volvo240) {
+                workshopCollide(x, y);
+                this.isVisible = true;
+            }
         }
         else if(this.isLoaded){
             throw new IllegalArgumentException("Can't gas while loaded");

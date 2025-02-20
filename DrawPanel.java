@@ -73,13 +73,16 @@ public class DrawPanel <ACar extends Car> extends JPanel{
          // see javadoc for more info on the parameters
         if (!(cars == null)) {
             for (Car car : cars) {
+                if (car.isVisible) {
                 // System.out.println(car.modelName);
-                try {
-                    carImage = ImageIO.read(DrawPanel.class.getResourceAsStream(car.getPic()));
-                    // System.out.println(carPic + " " + car.getX() + " " + car.getY());
-                    g.drawImage(carImage, (int) car.getX(), (int) car.getY(), null);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    try {
+                        carImage = ImageIO.read(DrawPanel.class.getResourceAsStream(car.getPic()));
+                        // System.out.println(carPic + " " + car.getX() + " " + car.getY());
+                        g.drawImage(carImage, (int) car.getX(), (int) car.getY(), null);
+                    }
+                    catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }
