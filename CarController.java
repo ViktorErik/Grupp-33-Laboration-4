@@ -55,7 +55,6 @@ public class CarController <ACar extends Car> {
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
-            // var inne i forloopen innan:
         }
     }
 

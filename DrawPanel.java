@@ -17,7 +17,6 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     BufferedImage saabImage;
     BufferedImage scaniaImage;
     BufferedImage carImage;
-    String carPic = "";
     Point carPoint = new Point();
 
     BufferedImage volvoWorkshopImage;
@@ -28,7 +27,6 @@ public class DrawPanel <ACar extends Car> extends JPanel{
         carPoint.x = x;
         carPoint.y = y;
         this.cars = cars;
-        // carPic = car.getPic();
 
     }
 
@@ -45,11 +43,7 @@ public class DrawPanel <ACar extends Car> extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            /*
-            volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
-            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
-             */
+
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
         {
@@ -65,19 +59,12 @@ public class DrawPanel <ACar extends Car> extends JPanel{
         super.paintComponent(g);
         // lägg till filnamn fält i varje Carobjekt
 
-
-
-        // System.out.println(car.modelName + " " + car.x + " " + car.y + " " + car.getPic());
-        // g.drawImage(carImage, carPoint.x, carPoint.y, null);
-
          // see javadoc for more info on the parameters
         if (!(cars == null)) {
             for (Car car : cars) {
                 if (car.isVisible) {
-                // System.out.println(car.modelName);
                     try {
                         carImage = ImageIO.read(DrawPanel.class.getResourceAsStream(car.getPic()));
-                        // System.out.println(carPic + " " + car.getX() + " " + car.getY());
                         g.drawImage(carImage, (int) car.getX(), (int) car.getY(), null);
                     }
                     catch (IOException e) {
@@ -88,13 +75,5 @@ public class DrawPanel <ACar extends Car> extends JPanel{
         }
 
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
-            /*
-            if (i == 1) {
-                g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
-            }
-             */
         }
-
-        // g.drawImage(volvoImage, carPoint.x, carPoint.y, null);
-
 }
