@@ -1,4 +1,4 @@
-Analysera de beroenden som finns med avseende på cohesion och coupling, och Dependency Inversion Principle.
+* Analysera de beroenden som finns med avseende på cohesion och coupling, och Dependency Inversion Principle.
 
 
 Vilka beroenden är nödvändiga?
@@ -8,11 +8,20 @@ Dessutom ärver alla fordon från Car-klassen, eftersom alla fordon använder si
 Dessutom använder vi interfacet NonLoadable för fordon som inte ska kunna lastas på CarTransportTruck. Vi behöver
 också extenda JFrame och JPanel för att kunna visualisera spelet.
 
-Vilka klasser är beroende av varandra som inte borde vara det?
-Inga!
+* Vilka klasser är beroende av varandra som inte borde vara det?
+* Finns det starkare beroenden än nödvändigt?
+Car är lite beroende av CarView då den använder storleken av skärmen för att hantera kollisioner
+mellan bil och kanter. Dessutom använder sig Car av fält från DrawPanel för att hantera kollision mellan
+bil och workshop. I CarController skriver vi explicit ut vilka klasser som har turbo och att Scania har
+flatbed exempelvis. Här hade vi bättre kunnat implementera Dependency Inversion Principle, och använda oss
+av ett interface för att särskilja fordon som har turbo och som inte har turbo samt fordon som
+flatbed och fordon som inte har flatbed. Car är även starkt beroende av Volvo240 då vi kollar efter
+kollision mellan Volvo240 och volvoWorkshop. För att göra så att alla bilar ska kunna köra in i sina egna workshops
+hade vi kunnat göra en abstract metod i Car som sedan implementeras i alla klasser som extendar Car.
 
-Finns det starkare beroenden än nödvändigt?
-// getters (och setters) för o kunna ha variabler private
-
-Kan ni identifiera några brott mot övriga designprinciper vi pratat om i kursen?
-
+* Kan ni identifiera några brott mot övriga designprinciper vi pratat om i kursen?
+Car bryter på sätt och vis mot Single Responsibility Principle då den hanterar alla funktioner som har med bilen
+att göra, men den hanterar också kollision med kanter av fönstret och kollision med volvoWorkshop. Man skulle
+kunna separera kollision från Car-klassen och hantera kollision i en egen klass. DrawPanel bryter mot Open-Closed
+Principle då vi har hårdkodat volvoWorkshop. Egentligen borde man kunna lägga in vilken workshop man vill
+och inte bara volvoWorkshop.
