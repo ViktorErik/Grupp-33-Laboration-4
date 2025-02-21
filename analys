@@ -1,18 +1,19 @@
-* Analysera de beroenden som finns med avseende på cohesion och coupling, och Dependency Inversion Principle.
+UPPGIFT 2 analys:
 
+* Analysera de beroenden som finns med avseende på cohesion och coupling, och Dependency Inversion Principle.
 
 Vilka beroenden är nödvändiga?
 Vi har skapat ett interface som heter Movable, där metoderna move, turnLeft och turnRight finns.
 Dessa är naturligtvis nödvändiga för alla fordon. Därför implementeras detta interface i Car-klassen.
 Dessutom ärver alla fordon från Car-klassen, eftersom alla fordon använder sig av alla Car-metoder.
 Dessutom använder vi interfacet NonLoadable för fordon som inte ska kunna lastas på CarTransportTruck. Vi behöver
-också extenda JFrame och JPanel för att kunna visualisera spelet.
+också extenda JFrame och JPanel för att kunna visualisera spelet. Car är lite beroende av CarView då den
+använder storleken av skärmen för att hantera kollisioner mellan bil och kanter. Dessutom använder
+sig Car av fält från DrawPanel för att hantera kollision mellan bil och workshop.
 
 * Vilka klasser är beroende av varandra som inte borde vara det?
 * Finns det starkare beroenden än nödvändigt?
-Car är lite beroende av CarView då den använder storleken av skärmen för att hantera kollisioner
-mellan bil och kanter. Dessutom använder sig Car av fält från DrawPanel för att hantera kollision mellan
-bil och workshop. I CarController skriver vi explicit ut vilka klasser som har turbo och att Scania har
+I CarController skriver vi explicit ut vilka klasser som har turbo och att Scania har
 flatbed exempelvis. Här hade vi bättre kunnat implementera Dependency Inversion Principle, och använda oss
 av ett interface för att särskilja fordon som har turbo och som inte har turbo samt fordon som
 flatbed och fordon som inte har flatbed. Car är även starkt beroende av Volvo240 då vi kollar efter
@@ -25,3 +26,23 @@ att göra, men den hanterar också kollision med kanter av fönstret och kollisi
 kunna separera kollision från Car-klassen och hantera kollision i en egen klass. DrawPanel bryter mot Open-Closed
 Principle då vi har hårdkodat volvoWorkshop. Egentligen borde man kunna lägga in vilken workshop man vill
 och inte bara volvoWorkshop.
+
+UPPGIFT 3 analys:
+* Analysera era klasser med avseende på Separation of Concern (SoC) och Single Responsibility Principle (SRP).
+* Vilka ansvarsområden har era klasser?
+AutoRepairShop:
+Car: Ansvarar för alla fält och metoder som är gemensamma för alla bilar, samt kollision med workshop och borders.
+CarController: Skapar objekt av typerna Saab, Volvo och Scania
+CarTransportTruck:
+CarView:
+DrawPanel:
+Saab95:
+Scania
+TestCars
+Volvo240
+
+* Vilka anledningar har de att förändras?
+
+
+* På vilka klasser skulle ni behöva tillämpa dekomposition för att bättre följa SoC och SRP?
+
