@@ -55,6 +55,30 @@ bilarna, och en klass som skapar en CarView som ansvarar för att anropa repaint
 
 
 UPPGIFT 4 analys:
+* Motivera, i termer av de principer vi gått igenom, varför era förbättringar verkligen är förbättringar.
+Enligt Single Responsibility principle ska varje klass bära sitt eget ansvar. Detta uppnår vi genom att
+separera kollision från Car-klassen och istället göra en ny klass för kollision med border
+och med workshops. Vi skulle också kunna göra interface för bilar med turbo, så att vi inte behöver hardcodea
+in Saab. Detta skulle göra att vi bättre fullföljer Dependency Inversion Principle. Det hjälper också med
+Open-Closed Principle då vi bara kan använda oss av "implements" då vi skapar nya bilklasser som
+har turbo.
 
+* Refaktoriseringsplan:
+1. Skapa ny klass vid namn Movement. Denna klass ska ta över ansvaret att både flytta bilarna och kolla ifall bilarna
+kolliderar med väggar eller sin typ av workshop. Det gör t.ex att Car blir oberoende av de klasserna som tillkom i lab3.
+De nya filerna använder de gamla medan de gamla bara använder sig själva.
+
+2. Interfaces för bilar med speciella egenskaper. Dessa bilar är för nuvarande Scania och CarTransportTruck som har
+flak som kan vinklas. Saab är ett annat exempel då den är ensam med att ha turbo. Om det nu skulle tillkomma nya bilar
+med dessa egenskaper så kan de bara implementera det interface som passar bäst.
+
+
+* Finns det några delar av planen som går att utföra parallellt, av olika utvecklare som arbetar oberoende
+* av varandra? Om inte, finns det något sätt att omformulera planen så att en sådan arbetsdelning är möjlig?
+Ja. En utvecklare skulle kunna implementera en Movement klass som hanterar movement och kollision med border
+samt workshops. En annan utvecklare skulle kunna fokusera på att göra interfaces för funktionalitet som
+vissa bilar delar, exempelvis finns turbo hos Saab, men inte hos andra bilar. Om man skulle skapa en ny klass
+med en ny bil som har turbo, skulle det vara mer effektivt att kunna implementera ett interface, t.ex.
+(turboInterface). På det viset behöver man inte hardcode:a in Saab då vi använder turboOn och turboOff.
 
 
