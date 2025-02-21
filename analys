@@ -27,22 +27,34 @@ kunna separera kollision från Car-klassen och hantera kollision i en egen klass
 Principle då vi har hårdkodat volvoWorkshop. Egentligen borde man kunna lägga in vilken workshop man vill
 och inte bara volvoWorkshop.
 
+
+
 UPPGIFT 3 analys:
 * Analysera era klasser med avseende på Separation of Concern (SoC) och Single Responsibility Principle (SRP).
 * Vilka ansvarsområden har era klasser?
-AutoRepairShop:
+AutoRepairShop: Implementation av en AutoRepairShop.
 Car: Ansvarar för alla fält och metoder som är gemensamma för alla bilar, samt kollision med workshop och borders.
-CarController: Skapar objekt av typerna Saab, Volvo och Scania
-CarTransportTruck:
-CarView:
-DrawPanel:
-Saab95:
-Scania
-TestCars
-Volvo240
+CarController: Skapar objekt av typerna Saab, Volvo och Scania. Den kör också spel-loopen och skapar en CarView. Den
+flyttar på bilarna och implementerar funktioner för gas, brake etc så att alla bilar gasar när man
+trycker på gas-knappen.
+CarTransportTruck: Implementation av CarTransportTruck.
+CarView: Skapar JPanels för knappar och JButtons för dem. Funktionalitet läggs till för alla knappar.
+DrawPanel: Skapar BufferedImage:s för Volvo, Saab, Scania och volvoWorkshop. Fönstret uppdateras
+med nya värden för bilarnas position varje frame i paintComponent.
+Saab95: Implementation av Saab med bl.a. turboOn
+Scania: Implementation av Scania med t.ex. tiltFlatbed.
+TestCars: Testar alla fordon och AutoRepairShop
+Volvo240: Implementation av Volvo med speedFactor.
 
 * Vilka anledningar har de att förändras?
-
-
 * På vilka klasser skulle ni behöva tillämpa dekomposition för att bättre följa SoC och SRP?
+Car har för mycket ansvar. Den borde inte behöva hantera kollision med border eller med workshop. Car skulle
+också eventuellt kunna flytta move-funktionen till en klass där kollision hanteras.
+CarController har också mycket ansvar. Den skulle kunna delas upp så att en klass kör spel-loopen och flyttar på
+bilarna, och en klass som skapar en CarView som ansvarar för att anropa repaint och uppdatera fönstret.
+
+
+UPPGIFT 4 analys:
+
+
 
