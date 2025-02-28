@@ -9,7 +9,7 @@ abstract class Car implements Movable {
     protected double currentSpeed;
     protected Color color;
     protected String modelName;
-    private int direction = 0;
+    int direction = 0;
     protected double x, y = 0;
     protected boolean isLoaded;
     protected String pic;
@@ -27,6 +27,7 @@ abstract class Car implements Movable {
         stopEngine();
     }
 
+    /*
     private void borderCollide(double x, double y) {
         collide(x, y);
         if (x < 0) this.x = 1;
@@ -78,6 +79,8 @@ abstract class Car implements Movable {
             workshopCollide(x, y);
         }
     }
+
+     */
 
 //ändrade på turn grejerna för de åkte åt fel håll annars
     public void turnLeft() {
