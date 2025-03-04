@@ -23,8 +23,13 @@ abstract class Car implements Movable {
         this.isLoaded = false;
         this.x = x;
         this.y = y;
-        this.pic=pic;
+        this.pic = pic;
         stopEngine();
+    }
+
+    @Override
+    public void move() {
+        Movement.move(this);
     }
 
     /*
@@ -82,7 +87,7 @@ abstract class Car implements Movable {
 
      */
 
-//ändrade på turn grejerna för de åkte åt fel håll annars
+    //ändrade på turn grejerna för de åkte åt fel håll annars
     public void turnLeft() {
         direction = (direction + 1) % 4;
     }
@@ -91,15 +96,15 @@ abstract class Car implements Movable {
         direction = (direction + 3) % 4;
     }
 
-    public int getNrDoors(){
+    public int getNrDoors() {
         return nrDoors;
     }
 
-    public double getEnginePower(){
+    public double getEnginePower() {
         return enginePower;
     }
 
-    public double getCurrentSpeed(){
+    public double getCurrentSpeed() {
         return currentSpeed;
     }
 
@@ -107,10 +112,10 @@ abstract class Car implements Movable {
         return color;
     }
 
-    public double[] getPosition(){
+    public double[] getPosition() {
         double[] tuple = new double[2];
-        tuple[0]=x;
-        tuple[1]=y;
+        tuple[0] = x;
+        tuple[1] = y;
         return tuple;
     }
 
@@ -121,20 +126,22 @@ abstract class Car implements Movable {
     public double getY() {
         return y;
     }
-    
+
     public String getPic() {
         return this.pic;
     }
 
-    public void setColor(Color clr){
+    public void setColor(Color clr) {
         color = clr;
     }
 
-    public void startEngine(){
-        currentSpeed = 0.1;
+    public void startEngine() {
+        if (this.getCurrentSpeed() == 0) {
+            currentSpeed = 0.1;
+        }
     }
 
-    public void stopEngine(){
+    public void stopEngine() {
         currentSpeed = 0;
     }
 
@@ -143,18 +150,24 @@ abstract class Car implements Movable {
     public void gas(double amount) {
         if (0 <= amount && amount <= 1 && !this.isLoaded) {
             incrementSpeed(amount);
+            if (!this.isVisible) {
+                this.isVisible = true;
+            }
+            /*
             if (!this.isVisible && this instanceof Volvo240) {
                 workshopCollide(x, y);
                 this.isVisible = true;
-            }
+
+             */
         }
-        else if(this.isLoaded){
-            throw new IllegalArgumentException("Can't gas while loaded");
-        }
+        else if(this.isLoaded) {
+        throw new IllegalArgumentException("Can't gas while loaded");
+    }
         else {
-            throw new IllegalArgumentException("Inappropriate value");
+        throw new IllegalArgumentException("Inappropriate value");
         }
     }
+
 
     public void brake(double amount){
         if (0 <= amount && amount <= 1) {

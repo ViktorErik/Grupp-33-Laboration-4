@@ -17,15 +17,12 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     BufferedImage saabImage;
     BufferedImage scaniaImage;
     BufferedImage carImage;
-    Point carPoint = new Point();
 
     BufferedImage volvoWorkshopImage;
     static Point volvoWorkshopPoint = new Point(300,300);
 
     // TODO: Make this general for all cars
-    void moveit(int x, int y, ArrayList<ACar> cars) {
-        carPoint.x = x;
-        carPoint.y = y;
+    void updateCars(ArrayList<ACar> cars) {
         this.cars = cars;
 
     }

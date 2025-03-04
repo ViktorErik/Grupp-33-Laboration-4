@@ -30,7 +30,7 @@ public class CarController <ACar extends Car> {
         // Instance of this class
         CarController<Car> cc = new CarController<Car>();
 
-        cc.cars.add(new Saab95(100, 0));
+        // cc.cars.add(new Saab95(100, 0));
         cc.cars.add(new Volvo240(200, 0));
         cc.cars.add(new Scania(300, 0));
 
@@ -50,7 +50,7 @@ public class CarController <ACar extends Car> {
                 // stod innan car.getPosition().getX() men aja
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y, cars);
+                frame.drawPanel.updateCars(cars);
 
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
