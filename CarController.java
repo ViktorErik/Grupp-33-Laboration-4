@@ -23,6 +23,7 @@ public class CarController <ACar extends Car> {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<ACar> cars = new ArrayList<>();
+    ArrayList<AutoRepairShop> workshops = new ArrayList<>();
 
     public CarController(){
         frame = new CarView("CarSim");
@@ -98,6 +99,8 @@ public class CarController <ACar extends Car> {
         cc.cars.add(CarFactory.createSaab95(100, 0));
         cc.cars.add(CarFactory.createVolvo240(200,0));
         cc.cars.add(CarFactory.createScania(300, 0));
+        cc.workshops.add(new AutoRepairShop<Volvo240>(400, 400, 2, "pics/VolvoBrand.jpg"));
+
 
 
         // Start a new view and send a reference of self
@@ -111,11 +114,11 @@ public class CarController <ACar extends Car> {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (ACar car : cars) {
-                car.move();
+                for (AutoRepairShop workshop : workshops) {
+                    car.move(workshop);
+                }
                 // stod innan car.getPosition().getX() men aja
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                frame.drawPanel.updateCars(cars);
+                frame.drawPanel.updateInfo(cars, workshops);
 
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();

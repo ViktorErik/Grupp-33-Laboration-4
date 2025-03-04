@@ -28,8 +28,8 @@ abstract class Car implements Movable {
     }
 
     @Override
-    public void move() {
-        Movement.move(this);
+    public void move(AutoRepairShop workshop) {
+        Movement.move(this, workshop);
     }
 
     /*

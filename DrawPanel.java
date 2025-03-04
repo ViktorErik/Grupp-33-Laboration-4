@@ -10,6 +10,7 @@ import javax.swing.*;
 public class DrawPanel <ACar extends Car> extends JPanel{
 
     private ArrayList<ACar> cars;
+    private ArrayList<AutoRepairShop> workshops;
     // Just a single image, TODO: Generalize
     // BufferedImage carImage;
     // To keep track of a single car's position
@@ -18,12 +19,15 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     BufferedImage scaniaImage;
     BufferedImage carImage;
 
-    BufferedImage volvoWorkshopImage;
-    static Point volvoWorkshopPoint = new Point(300,300);
+    // BufferedImage volvoWorkshopImage;
+    // static Point volvoWorkshopPoint = new Point(300,300);
+    BufferedImage workshopImage;
+    // static Point workshopPoint = new Point(400, 400);
 
     // TODO: Make this general for all cars
-    void updateCars(ArrayList<ACar> cars) {
+    void updateInfo(ArrayList<ACar> cars, ArrayList<AutoRepairShop> workshops) {
         this.cars = cars;
+        this.workshops = workshops;
 
     }
 
@@ -33,6 +37,7 @@ public class DrawPanel <ACar extends Car> extends JPanel{
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         // Print an error message in case file is not found with a try/catch block
+        /*
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
             // everything is in the same main folder.
@@ -40,12 +45,12 @@ public class DrawPanel <ACar extends Car> extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
+         */
 
     }
 
@@ -70,7 +75,20 @@ public class DrawPanel <ACar extends Car> extends JPanel{
                 }
             }
         }
+        if (!(workshops == null)) {
+            for (AutoRepairShop workshop: workshops) {
+                System.out.println(workshop.getPic());
+                if (workshop.getPic() != null) {
+                    try {
+                        workshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream(workshop.getPic()));
+                        g.drawImage(workshopImage, workshop.getX(), workshop.getY(), null);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
 
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        // g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
         }
 }

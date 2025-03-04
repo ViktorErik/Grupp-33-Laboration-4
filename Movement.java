@@ -1,6 +1,6 @@
 public class Movement {
 
-    public static void move(Car car) {
+    public static void move(Car car, AutoRepairShop workshop) {
         if (car.isVisible) {
             switch (car.direction) {
                 case 0:
@@ -18,7 +18,7 @@ public class Movement {
             }
         }
         borderCollide(car);
-        workshopCollide(car);
+        workshopCollide(car, workshop);
     }
 
     private static void borderCollide(Car car) {
@@ -32,14 +32,15 @@ public class Movement {
         collide(car);
         }
 
-    private static void workshopCollide(Car car) {
+    private static void workshopCollide(Car car, AutoRepairShop workshop) {
 
-        if (car.isVisible && car.x <= DrawPanel.volvoWorkshopPoint.getX() + 101 && DrawPanel.volvoWorkshopPoint.getX() <= car.x + 100 &&
-                        car.y <= DrawPanel.volvoWorkshopPoint.getY() + 96 && DrawPanel.volvoWorkshopPoint.getY() <= car.y + 60) {
-            if (car.direction == 0) car.y = DrawPanel.volvoWorkshopPoint.getY() - 60;
-            else if (car.direction == 1) car.x = DrawPanel.volvoWorkshopPoint.getX() - 100;
-            else if (car.direction == 2) car.y = DrawPanel.volvoWorkshopPoint.getY() + 96;
-            else if (car.direction == 3) car.x = DrawPanel.volvoWorkshopPoint.getX() + 101;
+
+        if (car.isVisible && car.x <= workshop.getX() + 101 && workshop.getX() <= car.x + 100 &&
+                        car.y <= workshop.getY() + 96 && workshop.getY() <= car.y + 60) {
+            if (car.direction == 0) car.y = workshop.getY() - 60;
+            else if (car.direction == 1) car.x = workshop.getX() - 100;
+            else if (car.direction == 2) car.y = workshop.getY() + 96;
+            else if (car.direction == 3) car.x = workshop.getX() + 101;
 
             if (car.isVisible && car instanceof Volvo240) {
                 car.isVisible = false;

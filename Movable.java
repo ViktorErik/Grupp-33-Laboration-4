@@ -1,5 +1,5 @@
 public interface Movable{
-    void move();
+    void move(AutoRepairShop workshop);
     void turnLeft();
     void turnRight();
 }

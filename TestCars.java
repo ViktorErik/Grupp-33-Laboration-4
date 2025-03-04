@@ -126,7 +126,7 @@ public class TestCars {
         ct.gas(1);
         ct.gas(1);
         ct.gas(1);
-        ct.move();
+        ct.move(new AutoRepairShop(100, 100, 10, "asd"));
         ct.stopEngine();
         ct.tiltFlatbed(true);
         assertThrows(IllegalArgumentException.class,() ->ct.loadCar(v));
@@ -172,7 +172,7 @@ public class TestCars {
         ct.tiltFlatbed(false);
         ct.startEngine();
         ct.gas(1);
-        ct.move();
+        ct.move(new AutoRepairShop(100, 100, 10, "asd"));
         assertEquals(ct.x, v.x);
         assertEquals(ct.y, v.y);
     }
@@ -191,12 +191,12 @@ public class TestCars {
     //<editor-fold desc="------------------------AutoRepairShopTests----------------------------">
     @org.junit.jupiter.api.Test
     void testAddCarAdds() {
-        AutoRepairShop<Volvo240> autoRepairShop = new AutoRepairShop<>(5);
+        AutoRepairShop<Volvo240> autoRepairShop = new AutoRepairShop<>(5, 10, 5, "asd");
         assertDoesNotThrow(() -> autoRepairShop.addCar(new Volvo240()));
     }
     @org.junit.jupiter.api.Test
     void testRemoveNonExistentCar() {
-        AutoRepairShop<Volvo240> autoRepairShop = new AutoRepairShop<>(5);
+        AutoRepairShop<Volvo240> autoRepairShop = new AutoRepairShop<>(5, 5, 5, "asd");
         Volvo240 v1 = new Volvo240();
         Volvo240 v2 = new Volvo240();
         autoRepairShop.addCar(v1);

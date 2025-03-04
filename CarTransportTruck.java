@@ -76,8 +76,8 @@ public class CarTransportTruck extends Car implements NonLoadable {
     }
 
     @Override
-    public void move() {
-        Movement.move(this);
+    public void move(AutoRepairShop workshop) {
+        Movement.move(this, workshop);
         for (Car car: loadedCars) {
             car.x = x;
             car.y = y;
