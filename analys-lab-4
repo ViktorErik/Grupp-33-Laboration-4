@@ -23,3 +23,32 @@ Användargränssnittet ni utgick från i del 3 var en ansats till implementation
 
 ***Rita ett nytt UML-diagram som beskriver en förbättrad design med avseende på MVC.
 
+    Finns i: LAB4_UML1.drawio.png
+
+Uppgift 3: Fler designmönster
+
+*Observer, Factory Method, State, Composite. För vart och ett av dessa fyra designmönster, svara på följande frågor:
+    -Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt? Vilka designproblem löste ni genom att använda det?
+
+        Observer Pattern är en grundläggande del utav JavaSwing paketet. Eftersom det används mycket i vårt projekt
+        så är det en pattern som vi implementerar.
+
+        Factory Method Pattern är något vi implementerar i UML diagrammet som en förändring vi tycker kommer förbättra
+        koden. Detta pga vi kommer få bättre HCLC.
+
+        State Pattern använder vi oss inte av alls.
+
+        Composite Pattern använder vi oss av i panelerna med knapparna och liknande. Varje knapp ligger i en och samma
+        JPanel vilket är ett praktexempel av Composite Pattern.
+
+    -Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern? Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+
+        Som vi nämnde i förra frågan, Factory Method pattern är ett designmönster som passar bra med att skapa bilarna
+        i vår kod. Därför är det något vi tänkt implementera i nästa refaktorisering.
+
+        Resten av mönstrerna tycker vi är antingen bra använda, eller onödiga att använda.
+
+        //Vi tänker även göra en parentklass för olika typer av workshops.
+
+**Uppdatera er design med de förbättringar ni identifierat.
+

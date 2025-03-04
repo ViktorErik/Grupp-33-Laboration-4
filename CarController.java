@@ -24,6 +24,71 @@ public class CarController <ACar extends Car> {
     // A list of cars, modify if needed
     ArrayList<ACar> cars = new ArrayList<>();
 
+    public CarController(){
+        frame = new CarView("CarSim");
+        frame.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gas(frame.gasAmount);
+            }
+        });
+        frame.turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { turboOn();}
+        });
+
+        frame.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                brake(frame.gasAmount);
+            }
+        });
+        frame.turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                turboOff();
+            }
+        });
+
+        frame.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startEngine();
+            }
+        });
+        frame.stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stopEngine();
+            }
+        });
+        frame.liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                liftBed();
+            }
+        });
+        frame.lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lowerBed();
+            }
+        });
+
+        frame.rightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                turnRight();
+            }
+        });
+        frame.leftButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                turnLeft();
+            }
+        });
+    }
+
     //methods:
 
     public static void main(String[] args) {
@@ -36,7 +101,6 @@ public class CarController <ACar extends Car> {
 
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
         // Start the timer
         cc.timer.start();
     }
@@ -112,4 +176,6 @@ public class CarController <ACar extends Car> {
             if (car instanceof Scania) ((Scania) car).tiltFlatbed(70);
         }
     }
+
+
 }
