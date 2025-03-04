@@ -77,7 +77,6 @@ public class DrawPanel <ACar extends Car> extends JPanel{
         }
         if (!(workshops == null)) {
             for (AutoRepairShop workshop: workshops) {
-                System.out.println(workshop.getPic());
                 if (workshop.getPic() != null) {
                     try {
                         workshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream(workshop.getPic()));
