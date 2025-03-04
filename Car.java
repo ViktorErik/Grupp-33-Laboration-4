@@ -155,7 +155,7 @@ abstract class Car implements Movable {
             }
             /*
             if (!this.isVisible && this instanceof Volvo240) {
-                workshopCollide(x, y);
+                move();
                 this.isVisible = true;
 
              */
