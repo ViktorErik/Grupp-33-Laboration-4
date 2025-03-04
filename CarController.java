@@ -88,6 +88,18 @@ public class CarController <ACar extends Car> {
                 turnLeft();
             }
         });
+        frame.addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCar();
+            }
+        });
+        frame.removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeCar();
+            }
+        });
     }
 
     //methods:
@@ -118,11 +130,12 @@ public class CarController <ACar extends Car> {
                     car.move(workshop);
                 }
                 // stod innan car.getPosition().getX() men aja
-                frame.drawPanel.updateInfo(cars, workshops);
 
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
             }
+            frame.drawPanel.updateInfo(cars, workshops);
+
+            // repaint() calls the paintComponent method of the panel
+            frame.drawPanel.repaint();
         }
     }
 
@@ -179,6 +192,24 @@ public class CarController <ACar extends Car> {
             if (car instanceof Scania) ((Scania) car).tiltFlatbed(70);
         }
     }
-
-
+    protected void addCar(){
+        double num = Math.random();
+        if(cars.size()<=10) {
+            if (num < 0.33)
+                this.cars.add((ACar) CarFactory.createSaab95(500, 500));
+            else if (num >= 0.33 && num < 0.66)
+                this.cars.add((ACar) CarFactory.createVolvo240(500, 400));
+            else
+                this.cars.add((ACar) CarFactory.createScania(500, 500));
+        }
+    }
+    protected void removeCar(){
+        int max = cars.size()-1;
+        if(max>0){
+            int num = (int)Math.floor(Math.random() * (max + 1));
+            cars.remove(num);
+        }
+        else if(max==0)
+            cars.removeFirst();
+    }
 }
