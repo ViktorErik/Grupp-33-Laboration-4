@@ -186,12 +186,14 @@ public class CarController <ACar extends Car> {
     }
     protected void addCar(){
         double num = Math.random();
-        if (num<0.33)
-            this.cars.add((ACar) CarFactory.createSaab95(500, 500));
-        else if(num>=0.33 && num<0.66)
-            this.cars.add((ACar) CarFactory.createVolvo240(500, 500));
-        else
-            this.cars.add((ACar) CarFactory.createScania(500, 500));
+        if(cars.size()<=10) {
+            if (num < 0.33)
+                this.cars.add((ACar) CarFactory.createSaab95(500, 500));
+            else if (num >= 0.33 && num < 0.66)
+                this.cars.add((ACar) CarFactory.createVolvo240(500, 400));
+            else
+                this.cars.add((ACar) CarFactory.createScania(500, 500));
+        }
     }
     protected void removeCar(){
         int max = cars.size()-1;
