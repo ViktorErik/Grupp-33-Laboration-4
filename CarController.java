@@ -30,9 +30,10 @@ public class CarController <ACar extends Car> {
         // Instance of this class
         CarController<Car> cc = new CarController<Car>();
 
-        // cc.cars.add(new Saab95(100, 0));
-        cc.cars.add(new Volvo240(200, 0));
-        cc.cars.add(new Scania(300, 0));
+        cc.cars.add(CarFactory.createSaab95(100, 0));
+        cc.cars.add(CarFactory.createVolvo240(200,0));
+        cc.cars.add(CarFactory.createScania(300, 0));
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);

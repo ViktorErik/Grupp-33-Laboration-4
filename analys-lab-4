@@ -1,6 +1,25 @@
 Uppgift 2: Model-View-Controller
 Användargränssnittet ni utgick från i del 3 var en ansats till implementation av Model-View-Controller Pattern, men där gränsdragningen mellan model, view, controller och applikation inte var något vidare genomtänkt (för att inte säga usel).
 
-Vilka avvikelser från MVC-idealet kan ni identifiera i det ursprungliga användargränssnittet? Vad borde ha gjorts smartare, dummare eller tunnare?
-Vilka av dessa brister åtgärdade ni med er nya design från del 3? Hur då? Vilka brister åtgärdade ni inte?
-Rita ett nytt UML-diagram som beskriver en förbättrad design med avseende på MVC.
+*Vilka avvikelser från MVC-idealet kan ni identifiera i det ursprungliga användargränssnittet? Vad borde ha gjorts smartare, dummare eller tunnare?
+
+    Det största problemet är att CarView och CarController har varsin field av varann. Alltså finns det
+    en CarController i CarView och vice versa. Ett av problemen med det är att viewen blir för smart.
+    Den har tillgång till nästan allt i projektet då CarController har det. Vi vill istället att
+    CarController har en CarView men inte tvärt om.
+
+    Ett annat problem var att Car använde sig av CarView och DrawPanel. Modelen ska inte veta att view ens existerar.
+    Så att den använder sig av viewen är en direkt förbrytelse mot MVC.
+
+    För att en bil ska existera i vårt program så skapar vi dem i CarController. Det hade nog varit bättre med en
+    factoryklass för att skapa bilar.
+
+**Vilka av dessa brister åtgärdade ni med er nya design från del 3? Hur då? Vilka brister åtgärdade ni inte?
+
+    Det enda som vi ändrade var att lägga till Movement som en klass. Det gör att Car inte har move funktionen
+    vilket i sin tur leder till att Car inte längre använder sig av viewen.
+
+    Resten av bristerna som är listade ovan har inte åtgärdats.
+
+***Rita ett nytt UML-diagram som beskriver en förbättrad design med avseende på MVC.
+

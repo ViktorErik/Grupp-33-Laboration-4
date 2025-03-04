@@ -1,7 +1,6 @@
 public class Movement {
 
     public static void move(Car car) {
-        System.out.println(car.x + " " + car.y + " " + car.getCurrentSpeed());
         if (car.isVisible) {
             switch (car.direction) {
                 case 0:
@@ -53,7 +52,6 @@ public class Movement {
     }
 
     private static void collide(Car car) {
-        System.out.println("HEJS");
         car.direction = (car.direction + 2) % 4; // Change direction
         car.stopEngine();
         car.startEngine();
