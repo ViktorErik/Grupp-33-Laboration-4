@@ -28,16 +28,16 @@ public class AutoRepairShop<T extends Car> {
     }
 
     public void addCar(T car) {
-        if (cars.size() < maxCars) {
-            cars.add(car);
+        if (this.cars.size() < maxCars) {
+            this.cars.add(car);
             return;
         }
         throw new IllegalArgumentException("AutoRepairShop is full! Chill out!");
     }
 
-    public T getCar(T car) {
-        if (cars.contains(car)) {
-            cars.remove(car);
+    public T removeCar(T car) {
+        if (this.cars.contains(car)) {
+            this.cars.remove(car);
             return car;
         }
         throw new IllegalArgumentException("Car is not in the AutoRepairShop object");

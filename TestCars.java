@@ -201,7 +201,7 @@ public class TestCars {
         Volvo240 v2 = new Volvo240();
         autoRepairShop.addCar(v1);
 
-        assertThrows(IllegalArgumentException.class, () -> autoRepairShop.getCar(v2));
+        assertThrows(IllegalArgumentException.class, () -> autoRepairShop.removeCar(v2));
 
     }
     //</editor-fold>
