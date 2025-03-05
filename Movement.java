@@ -32,7 +32,7 @@ public class Movement {
         collide(car);
         }
 
-    private static void workshopCollide(Car car, AutoRepairShop workshop) {
+    private static void workshopCollide(Car car, AutoRepairShop<Car> workshop) {
 
 
         if (car.isVisible && car.x <= workshop.getX() + 101 && workshop.getX() <= car.x + 100 &&
@@ -42,7 +42,8 @@ public class Movement {
             else if (car.direction == 2) car.y = workshop.getY() + 96;
             else if (car.direction == 3) car.x = workshop.getX() + 101;
 
-            if (car.isVisible && car instanceof Volvo240) {
+            if (car.isVisible && workshop.getCarType().equals(car.getModelName()) &&
+                    workshop.getAmountOfCars() < workshop.getMaxCars()) {
                 car.isVisible = false;
             }
         }

@@ -32,6 +32,10 @@ abstract class Car implements Movable {
         Movement.move(this, workshop);
     }
 
+    public String getModelName() {
+        return this.modelName;
+    }
+
     /*
     private void borderCollide(double x, double y) {
         collide(x, y);

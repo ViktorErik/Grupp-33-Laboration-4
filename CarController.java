@@ -111,8 +111,8 @@ public class CarController <ACar extends Car> {
         cc.cars.add(CarFactory.createSaab95(100, 0));
         cc.cars.add(CarFactory.createVolvo240(200,0));
         cc.cars.add(CarFactory.createScania(300, 0));
-        cc.workshops.add(new AutoRepairShop<Volvo240>(300, 300, 2, "pics/VolvoBrand.jpg"));
-        cc.workshops.add(new AutoRepairShop<Volvo240>(700, 300, 2, "pics/VolvoBrand.jpg"));
+        cc.workshops.add(new AutoRepairShop<Volvo240>(300, 300, 2, "pics/VolvoBrand.jpg", "Volvo240"));
+        cc.workshops.add(new AutoRepairShop<Saab95>(700, 300, 2, "pics/SaabBrand.jpg", "Saab95"));
 
 
         // Start a new view and send a reference of self

@@ -5,16 +5,26 @@ public class AutoRepairShop<T extends Car> {
     ArrayList<T> cars = new ArrayList<>();
     protected String pic;
     int x, y;
+    private final String brandName;
 
-    protected AutoRepairShop(int x, int y, int maxCars, String pic){
+    protected AutoRepairShop(int x, int y, int maxCars, String pic, String brandName){
         this.maxCars = maxCars;
         this.pic = pic;
         this.x = x;
         this.y = y;
+        this.brandName = brandName;
     }
 
     public int getMaxCars() {
         return this.maxCars;
+    }
+
+    public int getAmountOfCars() {
+        return cars.size();
+    }
+
+    public String getCarType() {
+        return brandName;
     }
 
     public void addCar(T car) {

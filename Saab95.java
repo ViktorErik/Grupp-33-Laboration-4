@@ -3,6 +3,7 @@ import java.awt.*;
 public class Saab95 extends Car implements HasTurbo{
     private boolean turboOn = false;
 
+
     public Saab95() {
         super(2, Color.red, 125, "Saab95", 0, 0, "pics/Saab95.jpg");
     }
