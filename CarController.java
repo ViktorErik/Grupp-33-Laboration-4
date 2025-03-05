@@ -111,9 +111,9 @@ public class CarController <ACar extends Car> {
         cc.cars.add(CarFactory.createSaab95(100, 0));
         cc.cars.add(CarFactory.createVolvo240(200,0));
         cc.cars.add(CarFactory.createScania(300, 0));
-        cc.workshops.add(new AutoRepairShop<Volvo240>(300, 300, 2, "pics/VolvoBrand.jpg", "Volvo240"));
-        cc.workshops.add(new AutoRepairShop<Saab95>(700, 300, 2, "pics/SaabBrand.jpg", "Saab95"));
-
+        // cc.workshops.add(new AutoRepairShop<Volvo240>(300, 300, 2, "pics/VolvoBrand.jpg", "Volvo240"));
+        // cc.workshops.add(new AutoRepairShop<Car>(700, 300, 2, "pics/SaabBrand.jpg", "Car"));
+        cc.workshops.add(RepairShopFactory.createSaabWorkshop(350, 350, 2));
 
         // Start a new view and send a reference of self
         // Start the timer
@@ -144,6 +144,9 @@ public class CarController <ACar extends Car> {
         double gasAmount = ((double) amount) / 100;
         for (ACar car : cars) {
             car.gas(gasAmount);
+            for (AutoRepairShop workshop : workshops) {
+                if (workshop.cars.contains(car)) workshop.removeCar(car);
+            }
         }
     }
     protected void brake(int amount) {
@@ -195,7 +198,7 @@ public class CarController <ACar extends Car> {
     protected void addCar(){
         double num = Math.random();
         if(cars.size()<=10) {
-            if (num < 0.99)
+            if (num < 1)
                 this.cars.add((ACar) CarFactory.createSaab95(500, 500));
             else if (num >= 0.33 && num < 0.66)
                 this.cars.add((ACar) CarFactory.createVolvo240(550, 500));

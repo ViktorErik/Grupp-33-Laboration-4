@@ -36,60 +36,6 @@ abstract class Car implements Movable {
         return this.modelName;
     }
 
-    /*
-    private void borderCollide(double x, double y) {
-        collide(x, y);
-        if (x < 0) this.x = 1;
-        if (x + 100 > CarView.X) this.x = CarView.X - 101;
-        if (y < 0) this.y = 1;
-        if (y + 60 > CarView.paneY) this.y = CarView.paneY - 61;
-    }
-
-    private void workshopCollide(double x, double y) {
-        if (this.isVisible && this instanceof Volvo240) {
-            this.isVisible = false;
-        }
-
-        if (direction == 0) this.y = DrawPanel.volvoWorkshopPoint.getY() - 60;
-        if (direction == 1) this.x = DrawPanel.volvoWorkshopPoint.getX() - 100;
-        if (direction == 2) this.y = DrawPanel.volvoWorkshopPoint.getY() + 96;
-        if (direction == 3) this.x = DrawPanel.volvoWorkshopPoint.getX() + 101;
-        collide(x, y);
-
-    }
-
-    private void collide(double x, double y) {
-        direction = (direction + 2) % 4; // Change direction
-        stopEngine();
-        startEngine();
-    }
-
-    public void move() {
-        switch (direction) {
-            case 0:
-                y += getCurrentSpeed();
-                break;
-            case 1:
-                x += getCurrentSpeed();
-                break;
-            case 2:
-                y -= getCurrentSpeed();
-                break;
-            case 3:
-                x -= getCurrentSpeed();
-                break;
-        }
-        if (x<0 || y<0 || x+100 > CarView.X || y+60>CarView.paneY) {
-            borderCollide(x, y);
-        }
-        if (
-                this.x <= DrawPanel.volvoWorkshopPoint.getX() + 101 && DrawPanel.volvoWorkshopPoint.getX() <= this.x + 100 &&
-                this.y <= DrawPanel.volvoWorkshopPoint.getY() + 96 && DrawPanel.volvoWorkshopPoint.getY() <= this.y + 60) {
-            workshopCollide(x, y);
-        }
-    }
-
-     */
 
     //ändrade på turn grejerna för de åkte åt fel håll annars
     public void turnLeft() {
@@ -156,13 +102,9 @@ abstract class Car implements Movable {
             incrementSpeed(amount);
             if (!this.isVisible) {
                 this.isVisible = true;
-            }
-            /*
-            if (!this.isVisible && this instanceof Volvo240) {
-                move();
-                this.isVisible = true;
+                // Anropa removeCar på nåt sätt
 
-             */
+            }
         }
         else if(this.isLoaded) {
         throw new IllegalArgumentException("Can't gas while loaded");

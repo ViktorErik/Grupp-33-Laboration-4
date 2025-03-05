@@ -34,7 +34,7 @@ public class Movement {
         }
 
     private static void workshopCollide(Car car, AutoRepairShop<Car> workshop) {
-
+        System.out.println(workshop.getAmountOfCars());
 
         if (car.isVisible && car.x <= workshop.getX() + 101 && workshop.getX() <= car.x + 100 &&
                         car.y <= workshop.getY() + 96 && workshop.getY() <= car.y + 60) {
@@ -43,7 +43,7 @@ public class Movement {
             else if (car.direction == 2) car.y = workshop.getY() + 96;
             else if (car.direction == 3) car.x = workshop.getX() + 101;
 
-            if (car.isVisible && workshop.getCarType().equals(car.getModelName()) &&
+            if (car.isVisible && (workshop.getCarType().equals("Car") || workshop.getCarType().equals(car.getModelName())) &&
                     workshop.getAmountOfCars() < workshop.getMaxCars()) {
                 car.isVisible = false;
                 workshop.addCar(car);
