@@ -14,15 +14,8 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     // Just a single image, TODO: Generalize
     // BufferedImage carImage;
     // To keep track of a single car's position
-    BufferedImage volvoImage;
-    BufferedImage saabImage;
-    BufferedImage scaniaImage;
     BufferedImage carImage;
-
-    // BufferedImage volvoWorkshopImage;
-    // static Point volvoWorkshopPoint = new Point(300,300);
     BufferedImage workshopImage;
-    // static Point workshopPoint = new Point(400, 400);
 
     // TODO: Make this general for all cars
     void updateInfo(ArrayList<ACar> cars, ArrayList<AutoRepairShop> workshops) {
