@@ -1,7 +1,7 @@
 public class Movement {
 
     public static void move(Car car, AutoRepairShop workshop) {
-        // System.out.println(workshop.getAmountOfCars() + " " + workshop.getMaxCars());
+
         if (car.isVisible) {
             switch (car.direction) {
                 case 0:
@@ -34,7 +34,6 @@ public class Movement {
         }
 
     private static void workshopCollide(Car car, AutoRepairShop<Car> workshop) {
-        System.out.println(workshop.getAmountOfCars());
 
         if (car.isVisible && car.x <= workshop.getX() + 101 && workshop.getX() <= car.x + 100 &&
                         car.y <= workshop.getY() + 96 && workshop.getY() <= car.y + 60) {
