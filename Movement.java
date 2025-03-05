@@ -1,6 +1,7 @@
 public class Movement {
 
     public static void move(Car car, AutoRepairShop workshop) {
+        // System.out.println(workshop.getAmountOfCars() + " " + workshop.getMaxCars());
         if (car.isVisible) {
             switch (car.direction) {
                 case 0:
@@ -45,6 +46,7 @@ public class Movement {
             if (car.isVisible && workshop.getCarType().equals(car.getModelName()) &&
                     workshop.getAmountOfCars() < workshop.getMaxCars()) {
                 car.isVisible = false;
+                workshop.addCar(car);
             }
         }
         else {

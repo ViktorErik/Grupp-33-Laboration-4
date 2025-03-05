@@ -20,7 +20,7 @@ public class AutoRepairShop<T extends Car> {
     }
 
     public int getAmountOfCars() {
-        return cars.size();
+        return this.cars.size();
     }
 
     public String getCarType() {
