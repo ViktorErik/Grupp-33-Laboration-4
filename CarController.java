@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -12,95 +15,170 @@ import java.util.ArrayList;
 
 public class CarController <ACar extends Car> {
     // member fields:
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 20;
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
-    // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    int gasAmount = 10;
     // A list of cars, modify if needed
     ArrayList<ACar> cars = new ArrayList<>();
     ArrayList<AutoRepairShop> workshops = new ArrayList<>();
-
+    JPanel controlPanel;
+    JPanel gasPanel;
+    JPanel turnPanel;
+    JButton startButton;
+    JButton stopButton;
     public CarController(){
-        frame = new CarView("CarSim");
-        frame.gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gas(frame.gasAmount);
-            }
-        });
-        frame.turboOnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { turboOn();}
-        });
 
-        frame.brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                brake(frame.gasAmount);
-            }
-        });
-        frame.turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                turboOff();
-            }
-        });
+        controlPanel = new JPanel();
 
-        frame.startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startEngine();
-            }
-        });
-        frame.stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stopEngine();
-            }
-        });
-        frame.liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                liftBed();
-            }
-        });
-        frame.lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                lowerBed();
+        gasPanel = new JPanel();
+
+        turnPanel = new JPanel();
+
+        startButton = new JButton();
+
+        stopButton = new JButton();
+
+        JSpinner gasSpinner = new JSpinner();
+
+        JLabel gasLabel = new JLabel("Amount");
+
+        JButton gasButton = new JButton("Gas");
+        JButton brakeButton = new JButton("Brake");
+        JButton turboOnButton = new JButton("Saab Turbo on");
+        JButton turboOffButton = new JButton("Saab Turbo off");
+        JButton liftBedButton = new JButton("Scania Lift Bed");
+        JButton lowerBedButton = new JButton("Lower Lift Bed");
+
+        JButton startButton = new JButton("Start all cars");
+        JButton stopButton = new JButton("Stop all cars");
+
+        JButton rightButton = new JButton("Turn right");
+        JButton leftButton = new JButton("Turn left");
+
+        JButton addCarButton = new JButton("Add Car");
+        JButton removeCarButton = new JButton("Remove Car");
+
+        SpinnerModel spinnerModel =
+                new SpinnerNumberModel(10, //initial value
+                        0, //min
+                        100, //max
+                        1);//step
+        gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
 
-        frame.rightButton.addActionListener(new ActionListener() {
+        gasPanel.setLayout(new BorderLayout());
+        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+
+        controlPanel.setLayout(new GridLayout(2,5));
+
+        controlPanel.add(gasButton, 0);
+        controlPanel.add(turboOnButton, 1);
+        controlPanel.add(liftBedButton, 2);
+        controlPanel.add(addCarButton, 3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOffButton, 5);
+        controlPanel.add(lowerBedButton, 6);
+        controlPanel.add(removeCarButton, 7);
+        controlPanel.setPreferredSize(new Dimension((Application.X/2)-50, 200));
+        controlPanel.setBackground(Color.CYAN);
+
+
+        startButton.setBackground(Color.blue);
+        startButton.setForeground(Color.green);
+        startButton.setPreferredSize(new Dimension(Application.X/5-15,200));
+
+
+        stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.black);
+        stopButton.setPreferredSize(new Dimension(Application.X/5-15,200));
+
+        turnPanel.setLayout(new GridLayout(2,1));
+        turnPanel.add(rightButton);
+        turnPanel.add(leftButton);
+
+        turnPanel.setPreferredSize(new Dimension(100, 200));
+        turnPanel.setBackground(Color.CYAN);
+
+        gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                turnRight();
+                Application.gas(gasAmount);
             }
         });
-        frame.leftButton.addActionListener(new ActionListener() {
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { Application.turboOn();}
+        });
+
+        brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                turnLeft();
+                Application.brake(gasAmount);
             }
         });
-        frame.addCarButton.addActionListener(new ActionListener() {
+        turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addCar();
+                Application.turboOff();
             }
         });
-        frame.removeCarButton.addActionListener(new ActionListener() {
+
+        startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeCar();
+                Application.startEngine();
             }
         });
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Application.stopEngine();
+            }
+        });
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Application.liftBed();
+            }
+        });
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Application.lowerBed();
+            }
+        });
+
+        rightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Application.turnRight();
+            }
+        });
+        leftButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Application.turnLeft();
+            }
+        });
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Application.addCar();
+            }
+        });
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Application.removeCar();
+            }
+        });
+
     }
+
+
 
     //methods:
 
@@ -115,113 +193,11 @@ public class CarController <ACar extends Car> {
         // cc.workshops.add(new AutoRepairShop<Car>(700, 300, 2, "pics/SaabBrand.jpg", "Car"));
         cc.workshops.add(RepairShopFactory.createSaabWorkshop(350, 350, 2));
         cc.workshops.add(RepairShopFactory.createScaniaWorkshop(550, 200, 1));
-        cc.timer.start();
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (ACar car : cars) {
-                for (AutoRepairShop workshop : workshops) {
-                    car.move(workshop);
-                }
-                // stod innan car.getPosition().getX() men aja
 
-            }
-            frame.drawPanel.updateInfo(cars, workshops);
 
-            // repaint() calls the paintComponent method of the panel
-            frame.drawPanel.repaint();
-        }
-    }
-
-    // Calls the gas method for each car once
-    protected void gas(int amount) {
-        double gasAmount = ((double) amount) / 100;
-        for (ACar car : cars) {
-            car.gas(gasAmount);
-            for (AutoRepairShop workshop : workshops) {
-                if (workshop.cars.contains(car)) workshop.removeCar((Car) car);
-            }
-        }
-    }
-    protected void brake(int amount) {
-        double brakeAmount = ((double) amount) / 100;
-        for (ACar car : cars) {
-            car.brake(brakeAmount);
-        }
-    }
-    protected void startEngine() {
-        for (ACar car : cars) {
-            car.startEngine();
-        }
-    }
-    protected void stopEngine() {
-        for (ACar car : cars) {
-            car.stopEngine();
-        }
-    }
-    protected void turnRight() {
-        for (ACar car : cars) {
-            car.turnRight();
-        }
-    }
-    protected void turnLeft() {
-        for (ACar car : cars) {
-            car.turnLeft();
-        }
-    }
-    protected void turboOff() {
-        for (ACar car : cars) {
-            if (car instanceof Saab95) ((Saab95) car).setTurboOff();
-        }
-    }
-    protected void turboOn() {
-        for (ACar car : cars) {
-            if (car instanceof Saab95) ((Saab95) car).setTurboOn();
-        }
-    }
-    protected void liftBed() {
-        for (ACar car : cars) {
-            if (car instanceof Scania) ((Scania) car).tiltFlatbed(0);
-        }
-    }
-    protected void lowerBed() {
-        for (ACar car : cars) {
-            if (car instanceof Scania) ((Scania) car).tiltFlatbed(70);
-        }
-    }
-    protected void addCar(){
-        double num = Math.random();
-        if(cars.size()<=10) {
-            if (num < 1)
-                this.cars.add((ACar) CarFactory.createSaab95(500, 500));
-            else if (num >= 0.33 && num < 0.66)
-                this.cars.add((ACar) CarFactory.createVolvo240(550, 500));
-            else
-                this.cars.add((ACar) CarFactory.createScania(600, 500));
-        }
-    }
-    protected void removeCar(){
-        int max = cars.size()-1;
-        if (max <= 0) return;
-        if(max>0){
-            int num = (int)Math.floor(Math.random() * (max + 1));
-            if (cars.get(num).isVisible) {
-                cars.remove(num);
-            }
-            else {
-                removeCar();
-            }
-        }
-        else if(max==0)
-            if (cars.get(max).isVisible) {
-                cars.removeFirst();
-            }
-            else {
-                removeCar();
-            }
-    }
 }

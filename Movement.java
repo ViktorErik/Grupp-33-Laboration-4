@@ -24,9 +24,9 @@ public class Movement {
 
     private static void borderCollide(Car car) {
         if (car.x < 0)                       car.x = 1;
-        else if (car.x + 100 > CarView.X)    car.x = CarView.X - 101;
+        else if (car.x + 100 > Application.X)    car.x = Application.X - 101;
         else if (car.y < 0)                  car.y = 1;
-        else if (car.y + 60 > CarView.paneY) car.y = CarView.paneY - 61;
+        else if (car.y + 60 > Application.paneY) car.y = Application.paneY - 61;
         else {
             return;
         }

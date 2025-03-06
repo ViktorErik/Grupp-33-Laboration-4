@@ -59,24 +59,4 @@ public class AutoRepairShop<T extends Car> {
         return this.pic;
     }
 
-    public static void main(String[] args) {
-        /*
-        AutoRepairShop<Volvo240> rs = new AutoRepairShop<>(100);
-        rs.addCar(new Volvo240());
-        Volvo240 volvo = new Volvo240();
-        rs.addCar(new Volvo240());
-        System.out.println(rs.getCar(volvo) instanceof Volvo240); // true
-        // Dessa ger errors förty rs är av typen Volvo240
-        // rs.addCar(new CarTransportTruck());
-        // rs.addCar(new Saab95());
-
-        // Denna AutoRepairShop tar vilka cars som helst
-        AutoRepairShop<Car> rs2 = new AutoRepairShop<>(100);
-        rs2.addCar(new Volvo240());
-        Saab95 saab = new Saab95();
-        rs2.addCar(saab);
-        System.out.println(rs2.getCar(saab) instanceof Volvo240); // false
-
-         */
-    }
 }
