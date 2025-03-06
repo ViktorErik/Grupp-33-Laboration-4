@@ -50,6 +50,6 @@ public class Scania extends Car implements NonLoadable{
 
     @Override
     protected double speedFactor() {
-        return enginePower * trimfactor * 0.05;
+        return enginePower * trimfactor * 0.02;
     }
 }

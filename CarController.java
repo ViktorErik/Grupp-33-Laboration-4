@@ -4,63 +4,50 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /*
 * This class represents the Controller part in the MVC pattern.
-* It's responsibilities is to listen to the View and responds in a appropriate manner by
+* It's responsibilities is to listen to the View and responds in an appropriate manner by
 * modifying the model state and the updating the view.
  */
 
 public class CarController <ACar extends Car> {
-    // member fields:
     int gasAmount = 10;
     // A list of cars, modify if needed
     ArrayList<ACar> cars = new ArrayList<>();
     ArrayList<AutoRepairShop> workshops = new ArrayList<>();
-    JPanel controlPanel;
-    JPanel gasPanel;
-    JPanel turnPanel;
-    JButton startButton;
-    JButton stopButton;
+    JPanel controlPanel = new JPanel();
+    JPanel gasPanel = new JPanel();
+    JPanel turnPanel = new JPanel();
+    JSpinner gasSpinner = new JSpinner();
+
+    JLabel gasLabel = new JLabel("Amount");
+
+    JButton gasButton = new JButton("Gas");
+    JButton brakeButton = new JButton("Brake");
+    JButton turboOnButton = new JButton("Turbo on");
+    JButton turboOffButton = new JButton("Turbo off");
+    JButton liftBedButton = new JButton("Lift Bed");
+    JButton lowerBedButton = new JButton("Lower Bed");
+
+    JButton startButton = new JButton("Start all cars");
+    JButton stopButton = new JButton("Stop all cars");
+
+    JButton rightButton = new JButton("Turn right");
+    JButton leftButton = new JButton("Turn left");
+
+    JButton addCarButton = new JButton("Add Car");
+    JButton removeCarButton = new JButton("Remove Car");
+
     public CarController(){
-
-        controlPanel = new JPanel();
-
-        gasPanel = new JPanel();
-
-        turnPanel = new JPanel();
-
-        startButton = new JButton();
-
-        stopButton = new JButton();
-
-        JSpinner gasSpinner = new JSpinner();
-
-        JLabel gasLabel = new JLabel("Amount");
-
-        JButton gasButton = new JButton("Gas");
-        JButton brakeButton = new JButton("Brake");
-        JButton turboOnButton = new JButton("Saab Turbo on");
-        JButton turboOffButton = new JButton("Saab Turbo off");
-        JButton liftBedButton = new JButton("Scania Lift Bed");
-        JButton lowerBedButton = new JButton("Lower Lift Bed");
-
-        JButton startButton = new JButton("Start all cars");
-        JButton stopButton = new JButton("Stop all cars");
-
-        JButton rightButton = new JButton("Turn right");
-        JButton leftButton = new JButton("Turn left");
-
-        JButton addCarButton = new JButton("Add Car");
-        JButton removeCarButton = new JButton("Remove Car");
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(10, //initial value
                         0, //min
                         100, //max
                         1);//step
+
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -98,7 +85,6 @@ public class CarController <ACar extends Car> {
         turnPanel.setLayout(new GridLayout(2,1));
         turnPanel.add(rightButton);
         turnPanel.add(leftButton);
-
         turnPanel.setPreferredSize(new Dimension(100, 200));
         turnPanel.setBackground(Color.CYAN);
 
@@ -175,29 +161,5 @@ public class CarController <ACar extends Car> {
                 Application.removeCar();
             }
         });
-
     }
-
-
-
-    //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController<Car> cc = new CarController<Car>();
-
-        cc.cars.add(CarFactory.createSaab95(100, 0));
-        cc.cars.add(CarFactory.createVolvo240(200,0));
-        cc.cars.add(CarFactory.createScania(300, 0));
-        // cc.workshops.add(new AutoRepairShop<Volvo240>(300, 300, 2, "pics/VolvoBrand.jpg", "Volvo240"));
-        // cc.workshops.add(new AutoRepairShop<Car>(700, 300, 2, "pics/SaabBrand.jpg", "Car"));
-        cc.workshops.add(RepairShopFactory.createSaabWorkshop(350, 350, 2));
-        cc.workshops.add(RepairShopFactory.createScaniaWorkshop(550, 200, 1));
-    }
-
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-
-
 }
