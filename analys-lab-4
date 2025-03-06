@@ -34,12 +34,12 @@ Uppgift 3: Fler designmönster
         så är det en pattern som vi implementerar.
 
         Factory Method Pattern är något vi implementerar i UML diagrammet som en förändring vi tycker kommer förbättra
-        koden. Detta pga vi kommer få bättre HCLC.
+        koden. Detta pga vi kommer få lägre coupling.
 
-        State Pattern använder vi oss inte av alls.
+        State Pattern använder vi oss inte av alls. Detta på grund av att vi tycker att det är onödigt i detta fall.
 
         Composite Pattern använder vi oss av i panelerna med knapparna och liknande. Varje knapp ligger i en och samma
-        JPanel vilket är ett praktexempel av Composite Pattern.
+        JPanel vilket är ett bra exempel av Composite Pattern.
 
     -Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern? Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
 
@@ -47,8 +47,6 @@ Uppgift 3: Fler designmönster
         i vår kod. Därför är det något vi tänkt implementera i nästa refaktorisering.
 
         Resten av mönstrerna tycker vi är antingen bra använda, eller onödiga att använda.
-
-        //Vi tänker även göra en parentklass för olika typer av workshops.
 
 **Uppdatera er design med de förbättringar ni identifierat.
 
