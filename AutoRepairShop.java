@@ -19,6 +19,10 @@ public class AutoRepairShop<T extends Car> {
         return this.maxCars;
     }
 
+    public ArrayList<T> getCars() {
+        return cars;
+    }
+
     public int getAmountOfCars() {
         return this.cars.size();
     }
@@ -35,7 +39,7 @@ public class AutoRepairShop<T extends Car> {
         throw new IllegalArgumentException("AutoRepairShop is full! Chill out!");
     }
 
-    public T removeCar(T car) {
+    public Car removeCar(Car car) {
         if (this.cars.contains(car)) {
             this.cars.remove(car);
             return car;

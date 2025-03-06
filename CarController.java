@@ -114,9 +114,7 @@ public class CarController <ACar extends Car> {
         // cc.workshops.add(new AutoRepairShop<Volvo240>(300, 300, 2, "pics/VolvoBrand.jpg", "Volvo240"));
         // cc.workshops.add(new AutoRepairShop<Car>(700, 300, 2, "pics/SaabBrand.jpg", "Car"));
         cc.workshops.add(RepairShopFactory.createSaabWorkshop(350, 350, 2));
-
-        // Start a new view and send a reference of self
-        // Start the timer
+        cc.workshops.add(RepairShopFactory.createScaniaWorkshop(550, 200, 1));
         cc.timer.start();
     }
 
@@ -145,7 +143,7 @@ public class CarController <ACar extends Car> {
         for (ACar car : cars) {
             car.gas(gasAmount);
             for (AutoRepairShop workshop : workshops) {
-                if (workshop.cars.contains(car)) workshop.removeCar(car);
+                if (workshop.cars.contains(car)) workshop.removeCar((Car) car);
             }
         }
     }
@@ -208,11 +206,22 @@ public class CarController <ACar extends Car> {
     }
     protected void removeCar(){
         int max = cars.size()-1;
+        if (max <= 0) return;
         if(max>0){
             int num = (int)Math.floor(Math.random() * (max + 1));
-            cars.remove(num);
+            if (cars.get(num).isVisible) {
+                cars.remove(num);
+            }
+            else {
+                removeCar();
+            }
         }
         else if(max==0)
-            cars.removeFirst();
+            if (cars.get(max).isVisible) {
+                cars.removeFirst();
+            }
+            else {
+                removeCar();
+            }
     }
 }

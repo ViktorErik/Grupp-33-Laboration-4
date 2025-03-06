@@ -6,7 +6,7 @@ public class RepairShopFactory {
     static AutoRepairShop<Volvo240> createVolvoWorkshop(int x, int y, int maxCars){
         return new AutoRepairShop<Volvo240>(x, y, maxCars, "pics/VolvoBrand.jpg", "Volvo240");
     }
-    static AutoRepairShop<Scania> createScaniaWorkshop(int x, int y, int maxCars, String pic, String brandName){
-        return new AutoRepairShop<Scania>(x, y, maxCars, pic, brandName);
+    static AutoRepairShop<Scania> createScaniaWorkshop(int x, int y, int maxCars){
+        return new AutoRepairShop<Scania>(x, y, maxCars, "pics/ScaniaBrand.png", "Scania");
     }
 }
