@@ -4,19 +4,14 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 /*
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in an appropriate manner by
 * modifying the model state and the updating the view.
  */
 
-public class CarController <ACar extends Car> {
+public class CarController {
     int gasAmount = 10;
-    // A list of cars, modify if needed
-    ArrayList<ACar> cars = new ArrayList<>();
-    ArrayList<AutoRepairShop> workshops = new ArrayList<>();
     JPanel controlPanel = new JPanel();
     JPanel gasPanel = new JPanel();
     JPanel turnPanel = new JPanel();
@@ -91,74 +86,76 @@ public class CarController <ACar extends Car> {
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.gas(gasAmount);
+                ButtonFunctions.gas(gasAmount);
             }
         });
         turboOnButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { Application.turboOn();}
+            public void actionPerformed(ActionEvent e) {
+                ButtonFunctions.turboOn();
+            }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.brake(gasAmount);
+                ButtonFunctions.brake(gasAmount);
             }
         });
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.turboOff();
+                ButtonFunctions.turboOff();
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.startEngine();
+                ButtonFunctions.startEngine();
             }
         });
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.stopEngine();
+                ButtonFunctions.stopEngine();
             }
         });
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.liftBed();
+                ButtonFunctions.liftBed();
             }
         });
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.lowerBed();
+                ButtonFunctions.lowerBed();
             }
         });
 
         rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.turnRight();
+                ButtonFunctions.turnRight();
             }
         });
         leftButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.turnLeft();
+                ButtonFunctions.turnLeft();
             }
         });
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.addCar();
+                ButtonFunctions.addCar();
             }
         });
         removeCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Application.removeCar();
+                ButtonFunctions.removeCar();
             }
         });
     }
