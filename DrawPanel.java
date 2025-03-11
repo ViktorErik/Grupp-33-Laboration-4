@@ -7,7 +7,7 @@ import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel <ACar extends Car> extends JPanel{
+public class DrawPanel extends JPanel{
 
     private ArrayList<String> carPicNames;
     private ArrayList<Integer> carXs;
@@ -15,13 +15,9 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     private ArrayList<String> workshopPicNames;
     private ArrayList<Integer> workshopXs;
     private ArrayList<Integer> workshopYs;
-    // Just a single image, TODO: Generalize
-    // BufferedImage carImage;
-    // To keep track of a single car's position
     BufferedImage carImage;
     BufferedImage workshopImage;
 
-    // TODO: Make this general for all cars
 
     void updateCarInfo(ArrayList<Integer> xs, ArrayList<Integer> ys, ArrayList<String> carPicNames) {
         this.carXs = xs;
@@ -59,9 +55,7 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // lägg till filnamn fält i varje Carobjekt
 
-         // see javadoc for more info on the parameters
         if (!(carPicNames == null)) {
             for (int i = 0; i < this.carPicNames.size(); i++) {
                 int x = this.carXs.get(i);

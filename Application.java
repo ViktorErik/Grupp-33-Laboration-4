@@ -51,6 +51,7 @@ public class Application {
     // Update Car and Workshop data that DrawPanel can use
     // instead of using the Car and Workshop objects
     // this removes dependency from DrawPanel to Car and AutoRepairShop
+    // Keep this method in here instead of CarManager to keep Controller thin
     public static void getNewInfo(ArrayList<Car> cars) {
 
         resetData();
@@ -70,14 +71,17 @@ public class Application {
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            // We have to call a function to update cars
+            // in the game loop:
             cars = CarManager.updateCars();
-            getNewInfo(cars);
+            getNewInfo(cars); // Update names positional values
             for (Car car : cars) {
                 for (AutoRepairShop workshop : workshops) {
                     car.move(workshop);
                 }
             }
-            // stod innan car.getPosition().getX() men aja
+            // Notify DrawPanel with new information without making
+            // DrawPanel dependent on Car
             if (!(carPicNames == null)) {
                 frame.drawPanel.updateCarInfo(carXs, carYs, carPicNames);
             }

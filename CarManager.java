@@ -7,9 +7,9 @@ public class CarManager {
     * updateCars funktion som uppdaterar data som Application kan använda
     *
      */
-    static ArrayList<Car> cars = new ArrayList<>();
+    private static ArrayList<Car> cars = new ArrayList<>();
 
-    public static ArrayList<Car> updateCars() {
+    static ArrayList<Car> updateCars() {
         return cars;
     }
 
