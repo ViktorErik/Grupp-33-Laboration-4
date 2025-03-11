@@ -9,8 +9,12 @@ import javax.swing.*;
 
 public class DrawPanel <ACar extends Car> extends JPanel{
 
-    private ArrayList<ACar> cars;
-    private ArrayList<AutoRepairShop> workshops;
+    private ArrayList<String> carPicNames;
+    private ArrayList<Integer> carXs;
+    private ArrayList<Integer> carYs;
+    private ArrayList<String> workshopPicNames;
+    private ArrayList<Integer> workshopXs;
+    private ArrayList<Integer> workshopYs;
     // Just a single image, TODO: Generalize
     // BufferedImage carImage;
     // To keep track of a single car's position
@@ -18,10 +22,17 @@ public class DrawPanel <ACar extends Car> extends JPanel{
     BufferedImage workshopImage;
 
     // TODO: Make this general for all cars
-    void updateInfo(ArrayList<ACar> cars, ArrayList<AutoRepairShop> workshops) {
-        this.cars = cars;
-        this.workshops = workshops;
 
+    void updateCarInfo(ArrayList<Integer> xs, ArrayList<Integer> ys, ArrayList<String> carPicNames) {
+        this.carXs = xs;
+        this.carYs = ys;
+        this.carPicNames = carPicNames;
+    }
+
+    void updateWorkshopInfo(ArrayList<Integer> xs, ArrayList<Integer> ys, ArrayList<String> workshopPicNames) {
+        this.workshopXs = xs;
+        this.workshopYs = ys;
+        this.workshopPicNames = workshopPicNames;
     }
 
     // Initializes the panel and reads the images
@@ -38,11 +49,7 @@ public class DrawPanel <ACar extends Car> extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
+
          */
 
     }
@@ -55,32 +62,32 @@ public class DrawPanel <ACar extends Car> extends JPanel{
         // lägg till filnamn fält i varje Carobjekt
 
          // see javadoc for more info on the parameters
-        if (!(cars == null)) {
-            for (Car car : cars) {
-                if (car.isVisible) {
-                    try {
-                        carImage = ImageIO.read(DrawPanel.class.getResourceAsStream(car.getPic()));
-                        g.drawImage(carImage, (int) car.getX(), (int) car.getY(), null);
-                    }
-                    catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+        if (!(carPicNames == null)) {
+            for (int i = 0; i < this.carPicNames.size(); i++) {
+                int x = this.carXs.get(i);
+                int y = this.carYs.get(i);
+                String picName = this.carPicNames.get(i);
+                try {
+                    carImage = ImageIO.read(DrawPanel.class.getResourceAsStream(picName));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+                g.drawImage(carImage, (int) x, (int) y, null);
             }
         }
-        if (!(workshops == null)) {
-            for (AutoRepairShop workshop: workshops) {
-                if (workshop.getPic() != null) {
+            if (!(workshopPicNames == null)) {
+                for (int i = 0; i < this.workshopPicNames.size(); i++) {
+                    int x = this.workshopXs.get(i);
+                    int y = this.workshopYs.get(i);
+                    String picName = this.workshopPicNames.get(i);
                     try {
-                        workshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream(workshop.getPic()));
-                        g.drawImage(workshopImage, workshop.getX(), workshop.getY(), null);
+                        workshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream(picName));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                    g.drawImage(workshopImage, x, y, null);
+
                 }
             }
-        }
-
-        // g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
         }
 }

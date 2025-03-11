@@ -86,76 +86,76 @@ public class CarController {
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.gas(gasAmount);
+                CarManager.gas(gasAmount);
             }
         });
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.turboOn();
+                CarManager.turboOn();
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.brake(gasAmount);
+                CarManager.brake(gasAmount);
             }
         });
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.turboOff();
+                CarManager.turboOff();
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.startEngine();
+                CarManager.startEngine();
             }
         });
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.stopEngine();
+                CarManager.stopEngine();
             }
         });
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.liftBed();
+                CarManager.liftBed();
             }
         });
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.lowerBed();
+                CarManager.lowerBed();
             }
         });
 
         rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.turnRight();
+                CarManager.turnRight();
             }
         });
         leftButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.turnLeft();
+                CarManager.turnLeft();
             }
         });
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.addCar();
+                CarManager.addCar();
             }
         });
         removeCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ButtonFunctions.removeCar();
+                CarManager.removeCar();
             }
         });
     }
